@@ -50,7 +50,7 @@ export default function ComingSoon() {
             </div>
           </div>
           <p className="text-center text-muted-foreground">
-            We're working hard to bring you something amazing. Stay tuned!
+            We&apos;re working hard to bring you something amazing. Stay tuned!
           </p>
         </CardContent>
       </Card>
