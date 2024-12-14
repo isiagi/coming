@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Redirect root to index.html
+    RewriteRule ^$ index.html [L]
+    
+    # Redirect all requests to corresponding HTML files
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+  </IfModule>
+  
+  # Disable directory browsing
+  Options -Indexes
