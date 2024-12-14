@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Search } from 'lucide-react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import {
   Accordion,
@@ -77,133 +78,214 @@ const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // Implement search functionality here
+    console.log('Search submitted')
+  }
 
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="text-2xl font-bold text-gray-800">DST</Link>
-            </div>
+          <div className="flex items-center">
+            <Link href="/" className="text-2xl font-bold text-gray-800">DST</Link>
           </div>
           
           {/* Desktop menu */}
           <div className="hidden sm:flex sm:items-center">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {navItems.map((item) => (
-                  <NavigationMenuItem key={item.title}>
-                    {item.sublinks ? (
-                      <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                    ) : (
-                      <Link href={item.href} legacyBehavior passHref>
-                        <NavigationMenuLink className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">
-                          {item.title}
-                        </NavigationMenuLink>
-                      </Link>
-                    )}
-                    {item.title === 'About DST' && (
-                      <NavigationMenuContent>
-                        <div className="w-[400px] p-4">
-                          <ul className="grid grid-cols-2 gap-3">
-                            <div className="space-y-2">
-                              {item.sublinks.slice(0, 5).map((sublink) => (
+            {!isSearchOpen ? (
+              <>
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    {navItems.map((item) => (
+                      <NavigationMenuItem key={item.title}>
+                        {item.sublinks ? (
+                          <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                        ) : (
+                          <Link href={item.href} legacyBehavior passHref>
+                            <NavigationMenuLink className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">
+                              {item.title}
+                            </NavigationMenuLink>
+                          </Link>
+                        )}
+                        {item.title === 'About DST' && (
+                          <NavigationMenuContent>
+                            <div className="w-[400px] p-4">
+                              <ul className="grid grid-cols-2 gap-3">
+                                <div className="space-y-2">
+                                  {item.sublinks.slice(0, 5).map((sublink) => (
+                                    <ListItem
+                                      key={sublink.title}
+                                      title={sublink.title}
+                                      href={sublink.href}
+                                    />
+                                  ))}
+                                </div>
+                                <div className="space-y-2">
+                                  {item.sublinks.slice(5, 10).map((sublink) => (
+                                    <ListItem
+                                      key={sublink.title}
+                                      title={sublink.title}
+                                      href={sublink.href}
+                                    />
+                                  ))}
+                                </div>
+                              </ul>
+                            </div>
+                          </NavigationMenuContent>
+                        )}
+                        {item.title === 'Products & Services' && (
+                          <NavigationMenuContent>
+                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                              {item.sublinks.map((sublink) => (
                                 <ListItem
                                   key={sublink.title}
                                   title={sublink.title}
                                   href={sublink.href}
                                 />
                               ))}
-                            </div>
-                            <div className="space-y-2">
-                              {item.sublinks.slice(5, 10).map((sublink) => (
-                                <ListItem
-                                  key={sublink.title}
-                                  title={sublink.title}
-                                  href={sublink.href}
-                                />
-                              ))}
-                            </div>
-                          </ul>
-                        </div>
-                      </NavigationMenuContent>
-                    )}
-                    {item.title === 'Products & Services' && (
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                          {item.sublinks.map((sublink) => (
-                            <ListItem
-                              key={sublink.title}
-                              title={sublink.title}
-                              href={sublink.href}
-                            />
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    )}
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+                            </ul>
+                          </NavigationMenuContent>
+                        )}
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Open search"
+                  className="ml-4"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              </>
+            ) : (
+              <form onSubmit={handleSearch} className="flex items-center">
+                <Input
+                  type="search"
+                  placeholder="Search..."
+                  className="w-64"
+                  autoFocus
+                />
+                <Button
+                  type="submit"
+                  variant="ghost"
+                  size="icon"
+                  className="ml-2"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsSearchOpen(false)}
+                  aria-label="Close search"
+                  className="ml-2"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </form>
+            )}
           </div>
 
           {/* Mobile menu button */}
           <div className="sm:hidden flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </Button>
+            {!isSearchOpen ? (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Open search"
+                  className="mr-2"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsOpen(!isOpen)}
+                  aria-label="Toggle menu"
+                >
+                  <Menu className="h-6 w-6" aria-hidden="true" />
+                </Button>
+              </>
+            ) : (
+              <form onSubmit={handleSearch} className="flex items-center">
+                <Input
+                  type="search"
+                  placeholder="Search..."
+                  className="w-full"
+                  autoFocus
+                />
+                <Button
+                  type="submit"
+                  variant="ghost"
+                  size="icon"
+                  className="ml-2"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsSearchOpen(false)}
+                  aria-label="Close search"
+                  className="ml-2"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`}>
-        <div className="pt-2 pb-3 space-y-1">
-          {navItems.map((item) => (
-            <div key={item.title}>
-              {item.sublinks ? (
-                <Accordion type="single" collapsible>
-                  <AccordionItem value={item.title}>
-                    <AccordionTrigger className="px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
-                      {item.title}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="pl-4">
-                        {item.sublinks.map((sublink) => (
-                          <Link
-                            key={sublink.title}
-                            href={sublink.href}
-                            className="block px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                          >
-                            {sublink.title}
-                          </Link>
-                        ))}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                >
-                  {item.title}
-                </Link>
-              )}
-            </div>
-          ))}
+      {!isSearchOpen && (
+        <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`}>
+          <div className="pt-2 pb-3 space-y-1">
+            {navItems.map((item) => (
+              <div key={item.title}>
+                {item.sublinks ? (
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value={item.title}>
+                      <AccordionTrigger className="px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                        {item.title}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="pl-4">
+                          {item.sublinks.map((sublink) => (
+                            <Link
+                              key={sublink.title}
+                              href={sublink.href}
+                              className="block px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                            >
+                              {sublink.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  >
+                    {item.title}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 }
