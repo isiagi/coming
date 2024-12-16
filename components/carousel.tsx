@@ -1,7 +1,3 @@
-// allow any typescript comment for this file
-// @ts-nocheck
-
-
 'use client'
 
 

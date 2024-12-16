@@ -1,8 +1,7 @@
 import React from 'react'
 
-type Props = {}
 
-const SubHeader = (props: Props) => {
+const SubHeader = () => {
   return (
     <div>SubHeader</div>
   )

@@ -17,13 +17,13 @@ export function ScrollNav({ items }: ScrollNavProps) {
   const [activeItem, setActiveItem] = useState(items[0]?.href)
 
   useEffect(() => {
-    let lastScrollY = window.pageYOffset
+    // let lastScrollY = window.pageYOffset
     const handleScroll = () => {
       const currentScrollY = window.pageYOffset
       const headerHeight = 500 // Same as ServiceHeader min-height
-      const documentHeight = document.documentElement.scrollHeight
-      const viewportHeight = window.innerHeight
-      const bottomThreshold = documentHeight - viewportHeight - 100
+      // const documentHeight = document.documentElement.scrollHeight
+      // const viewportHeight = window.innerHeight
+      // const bottomThreshold = documentHeight - viewportHeight - 100
 
       setIsSticky(currentScrollY > headerHeight)
       // setShowMainNav(
@@ -43,7 +43,7 @@ export function ScrollNav({ items }: ScrollNavProps) {
         }
       })
 
-      lastScrollY = currentScrollY
+      // lastScrollY = currentScrollY
     }
 
     window.addEventListener('scroll', handleScroll)

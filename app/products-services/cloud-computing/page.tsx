@@ -1,9 +1,8 @@
 import { ServiceHeader } from '@/components/service-header'
 import React from 'react'
 
-type Props = {}
 
-function page({}: Props) {
+function page() {
   return (
     <div>
         <ServiceHeader
