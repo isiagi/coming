@@ -87,7 +87,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-md fixed top-0 inset-x-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -116,7 +116,7 @@ export default function Navbar() {
                             <div className="w-[400px] p-4">
                               <ul className="grid grid-cols-2 gap-3">
                                 <div className="space-y-2">
-                                  {item.sublinks.slice(0, 5).map((sublink) => (
+                                  {item.sublinks?.slice(0, 5).map((sublink) => (
                                     <ListItem
                                       key={sublink.title}
                                       title={sublink.title}
@@ -125,7 +125,7 @@ export default function Navbar() {
                                   ))}
                                 </div>
                                 <div className="space-y-2">
-                                  {item.sublinks.slice(5, 10).map((sublink) => (
+                                  {item.sublinks?.slice(5, 10).map((sublink) => (
                                     <ListItem
                                       key={sublink.title}
                                       title={sublink.title}
@@ -140,7 +140,7 @@ export default function Navbar() {
                         {item.title === 'Products & Services' && (
                           <NavigationMenuContent>
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                              {item.sublinks.map((sublink) => (
+                              {item.sublinks?.map((sublink) => (
                                 <ListItem
                                   key={sublink.title}
                                   title={sublink.title}
