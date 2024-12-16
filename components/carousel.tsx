@@ -27,6 +27,7 @@ export default function IntelligentWorldCarousel() {
     setCurrentSlide(emblaApi.selectedScrollSnap())
   }, [emblaApi])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useEffect((): any => {
     if (!emblaApi) return
     onSelect()
