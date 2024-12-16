@@ -13,7 +13,7 @@ interface ScrollNavProps {
 
 export function ScrollNav({ items }: ScrollNavProps) {
   const [isSticky, setIsSticky] = useState(false)
-  const [showMainNav, setShowMainNav] = useState(true)
+  // const [showMainNav, setShowMainNav] = useState(true)
   const [activeItem, setActiveItem] = useState(items[0]?.href)
 
   useEffect(() => {
@@ -26,11 +26,11 @@ export function ScrollNav({ items }: ScrollNavProps) {
       const bottomThreshold = documentHeight - viewportHeight - 100
 
       setIsSticky(currentScrollY > headerHeight)
-      setShowMainNav(
-        currentScrollY < headerHeight ||
-        currentScrollY < lastScrollY ||
-        currentScrollY > bottomThreshold
-      )
+      // setShowMainNav(
+      //   currentScrollY < headerHeight ||
+      //   currentScrollY < lastScrollY ||
+      //   currentScrollY > bottomThreshold
+      // )
 
       // Update active item based on scroll position
       items.forEach(({ href }) => {
