@@ -63,7 +63,7 @@ export function ScrollNav({ items, height }: ScrollNavProps) {
     <div
     className={cn(
       'transition-all duration-300 ease-in-out w-full bg-white',
-      isSticky ? 'fixed left-0 right-0 shadow-md' : '',
+      isSticky ? 'fixed left-0 right-0 shadow-md z-10' : '',
       isSticky ? 'top-16' : '' // Position 64px (4rem) from the top, which is the height of the main navbar
     )}
     >
