@@ -1,10 +1,9 @@
 "use client";
 
-// import { Navbar } from '@/components/navbar'
 import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const navItems = [
@@ -15,7 +14,7 @@ const navItems = [
   { label: "Resources", href: "#resources" },
 ];
 
-export default function ManagedServicesPage() {
+function ManagedServicesContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [paddingTop, setPaddingTop] = useState("pt-[0px]");
@@ -47,9 +46,9 @@ export default function ManagedServicesPage() {
       window.removeEventListener("hashchange", checkPadding);
     };
   }, [pathname, searchParams]);
+
   return (
     <>
-      {/* <Navbar /> */}
       <SubNav
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -119,5 +118,13 @@ export default function ManagedServicesPage() {
         </section>
       </div>
     </>
+  );
+}
+
+export default function ManagedServicesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ManagedServicesContent />
+    </Suspense>
   );
 }
