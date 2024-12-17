@@ -8,19 +8,20 @@ interface ScrollNavProps {
   items: Array<{
     label: string
     href: string
-  }>
+  }>,
+  height: number
 }
 
-export function ScrollNav({ items }: ScrollNavProps) {
+export function ScrollNav({ items, height }: ScrollNavProps) {
   const [isSticky, setIsSticky] = useState(false)
   // const [showMainNav, setShowMainNav] = useState(true)
-  const [activeItem, setActiveItem] = useState(items[0]?.href)
+  const [activeItem, setActiveItem] = useState('')
 
   useEffect(() => {
     // let lastScrollY = window.pageYOffset
     const handleScroll = () => {
       const currentScrollY = window.pageYOffset
-      const headerHeight = 500 // Same as ServiceHeader min-height
+      const headerHeight = height // Same as ServiceHeader min-height
       // const documentHeight = document.documentElement.scrollHeight
       // const viewportHeight = window.innerHeight
       // const bottomThreshold = documentHeight - viewportHeight - 100
@@ -49,6 +50,14 @@ export function ScrollNav({ items }: ScrollNavProps) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [items])
+
+  // Change url to active item http://localhost:3000/products-services/managed-services#overview
+  useEffect(() => {
+    if (activeItem) {
+      history.replaceState(null, '', activeItem)
+    }
+  }, [activeItem])
+
 
   return (
     <div
