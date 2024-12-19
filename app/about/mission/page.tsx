@@ -1,3 +1,5 @@
+import AboutSection from '@/components/about-section';
+import MissionVisionValues from '@/components/mission-vision-values-alternating';
 import { ScrollNav } from '@/components/scroll-nav'
 import { ServiceHeader } from '@/components/service-header';
 import React from 'react'
@@ -27,6 +29,8 @@ function About() {
                   },
                 ]}
               />
+              <AboutSection />
+              <MissionVisionValues />
         <div className='px-10 py-4 min-h-screen'>
             <p>Hello</p>
         </div>
