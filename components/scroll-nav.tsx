@@ -1,71 +1,137 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState, useRef } from 'react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { debounce } from 'lodash';
 
 interface ScrollNavProps {
   items: Array<{
-    label: string
-    href: string
-  }>,
-  height: number
+    label: string;
+    href: string;
+  }>;
+  height: number;
+  onSectionClick: (sectionId: string) => void;
 }
 
-export function ScrollNav({ items, height }: ScrollNavProps) {
-  const [isSticky, setIsSticky] = useState(false)
-  // const [showMainNav, setShowMainNav] = useState(true)
-  const [activeItem, setActiveItem] = useState('')
+export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
+  const [isSticky, setIsSticky] = useState(false);
+  const [activeItem, setActiveItem] = useState('');
+  const scrollingRef = useRef(false);
+  const initialLoadRef = useRef(true);
 
-  useEffect(() => {
-    // let lastScrollY = window.pageYOffset
-    const handleScroll = () => {
-      const currentScrollY = window.pageYOffset
-      const headerHeight = height // Same as ServiceHeader min-height
-      // const documentHeight = document.documentElement.scrollHeight
-      // const viewportHeight = window.innerHeight
-      // const bottomThreshold = documentHeight - viewportHeight - 100
+  const debouncedScroll = debounce(() => {
+    const currentScrollY = window.scrollY;
+    const headerHeight = height;
+    const shouldBeSticky = currentScrollY > headerHeight;
 
-      setIsSticky(currentScrollY > headerHeight)
-      // setShowMainNav(
-      //   currentScrollY < headerHeight ||
-      //   currentScrollY < lastScrollY ||
-      //   currentScrollY > bottomThreshold
-      // )
-
-      // Update active item based on scroll position
-      items.forEach(({ href }) => {
-        const element = document.querySelector(href)
+    setIsSticky(shouldBeSticky);
+    
+    if (!scrollingRef.current) {
+      const navHeight = isSticky ? 80 : (80 + height); // Adjust offset based on sticky state
+      
+      let currentActive = '';
+      for (const { href } of items) {
+        const element = document.querySelector(href);
         if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveItem(href)
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= navHeight + 20 && rect.bottom >= navHeight) {
+            currentActive = href;
+            break;
           }
         }
-      })
-
-      // lastScrollY = currentScrollY
+      }
+      
+      if (currentActive !== activeItem) {
+        setActiveItem(currentActive);
+        if (currentActive && !scrollingRef.current && !initialLoadRef.current) {
+          history.replaceState(null, '', currentActive);
+        }
+      }
     }
+  }, 50);
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [items])
-
-  // Change url to active item http://localhost:3000/products-services/managed-services#overview
   useEffect(() => {
-    if (activeItem) {
-      history.replaceState(null, '', activeItem)
+    window.addEventListener('scroll', debouncedScroll);
+    
+    // Handle initial hash and prevent URL change on refresh
+    const hash = window.location.hash;
+    if (hash) {
+      setActiveItem(hash);
+      const element = document.querySelector(hash);
+      if (element) {
+        const headerOffset = 40;
+        const navOffset = 80;
+        const totalOffset = headerOffset + navOffset - 10; // Reduced padding
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'instant'
+        });
+      }
     }
-  }, [activeItem])
 
+    // Set initial load to false after a short delay
+    const timer = setTimeout(() => {
+      initialLoadRef.current = false;
+    }, 500);
+
+    return () => {
+      window.removeEventListener('scroll', debouncedScroll);
+      debouncedScroll.cancel();
+      clearTimeout(timer);
+    };
+  }, [height, items]);
+
+  const calculateScrollOffset = () => {
+    const currentScrollY = window.scrollY;
+    const headerHeight = height;
+    const shouldBeSticky = currentScrollY > headerHeight;
+    
+    // Reduced padding in the offset calculation
+    return shouldBeSticky ? 50 : 90;
+  };
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (!element) return;
+
+    scrollingRef.current = true;
+    const offsetPosition = element.getBoundingClientRect().top + 
+      window.pageYOffset - 
+      calculateScrollOffset();
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+
+    setActiveItem(href);
+    // Only update URL if not in initial load
+    if (!initialLoadRef.current) {
+      history.pushState(null, '', href);
+    }
+
+    setTimeout(() => {
+      scrollingRef.current = false;
+    }, 1000);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const sectionId = href.substring(1);
+    onSectionClick(sectionId);
+    scrollToSection(href);
+  };
 
   return (
     <div
-    className={cn(
-      'transition-all duration-300 ease-in-out w-full bg-white',
-      isSticky ? 'fixed left-0 right-0 shadow-md z-10' : '',
-      isSticky ? 'top-16' : '' // Position 64px (4rem) from the top, which is the height of the main navbar
-    )}
+      className={cn(
+        'transition-all duration-300 ease-in-out w-full bg-white',
+        isSticky ? 'fixed left-0 right-0 shadow-md z-10 top-16' : ''
+      )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -74,6 +140,7 @@ export function ScrollNav({ items, height }: ScrollNavProps) {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
                 className={cn(
                   'inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition-colors',
                   activeItem === item.href
@@ -89,6 +156,5 @@ export function ScrollNav({ items, height }: ScrollNavProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

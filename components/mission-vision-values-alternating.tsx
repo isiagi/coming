@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 
-export default function MissionVisionValues() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function MissionVisionValues({getSectionPadding}:any) {
   const sections = [
     {
       title: "Our Mission",
@@ -11,7 +12,8 @@ export default function MissionVisionValues() {
         "To stay at the forefront of technological advancement"
       ],
       imageUrl: "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
-      imageAlt: "Team collaborating on a project"
+      imageAlt: "Team collaborating on a project",
+      id: "mission"
     },
     {
       title: "Our Vision",
@@ -21,7 +23,8 @@ export default function MissionVisionValues() {
         "To be the leading technology partner for businesses worldwide"
       ],
       imageUrl: "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
-      imageAlt: "Futuristic vision of technology"
+      imageAlt: "Futuristic vision of technology",
+      id: "vision"
     },
     {
       title: "Core Values",
@@ -29,18 +32,19 @@ export default function MissionVisionValues() {
         "Integrity in all our dealings",
         "Innovation in our solutions",
         "Excellence in our service",
-        "Commitment to our clients"
+        "Commitment to our clients",
       ],
       imageUrl: "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
-      imageAlt: "Team demonstrating core values"
+      imageAlt: "Team demonstrating core values",
+      id: "core-values"
     }
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 bg-white">
+    <section className="w-full py-12 md:py-24 bg-white" >
       <div className="container px-4 md:px-6">
         {sections.map((section, index) => (
-          <div key={section.title} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 mb-16 items-center`}>
+          <div key={section.title} id={section.id} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 mb-16 items-center ${getSectionPadding(section.id)}`}>
             <div className="w-full md:w-1/2">
               <Image
                 src={section.imageUrl}

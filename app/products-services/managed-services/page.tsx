@@ -4,7 +4,6 @@ import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
 import { useEffect, useState, Suspense } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 
 const navItems = [
   { label: "All", href: "#overviewz" },
@@ -15,37 +14,38 @@ const navItems = [
 ];
 
 function ManagedServicesContent() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [paddingTop, setPaddingTop] = useState("pt-[0px]");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeSection, setActiveSection] = useState("");
+  const [clickedSection, setClickedSection] = useState("");
 
   useEffect(() => {
-    function checkPadding() {
-      const hash = window.location.hash;
-      console.log("Checking padding:", {
-        pathname,
-        hash,
-        searchParams: searchParams.toString(),
-      });
-
-      const isMatchingUrl =
-        pathname === "/products-services/managed-services" &&
-        hash === "#overview";
-
-      setPaddingTop(isMatchingUrl ? "pt-[150px]" : "pt-[0px]");
+    // Check for hash on initial load
+    const hash = window.location.hash;
+    if (hash) {
+      setClickedSection(hash.substring(1));
     }
 
-    // Check initial state
-    checkPadding();
-
-    // Add event listener for hash changes
-    window.addEventListener("hashchange", checkPadding);
-
-    // Cleanup listener
-    return () => {
-      window.removeEventListener("hashchange", checkPadding);
+    const handleScroll = () => {
+      const navHeight = 80; // Reduced from 112 for less spacing
+      
+      navItems.forEach(({ href }) => {
+        const element = document.querySelector(href);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= navHeight + 20 && rect.bottom >= navHeight) {
+            setActiveSection(href.substring(1));
+          }
+        }
+      });
     };
-  }, [pathname, searchParams]);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const getSectionPadding = (sectionId: string) => {
+    return clickedSection === sectionId ? "pt-28" : ""; // Reduced from pt-28
+  };
 
   return (
     <>
@@ -70,50 +70,59 @@ function ManagedServicesContent() {
           },
         ]}
       />
-      <ScrollNav items={navItems} height={350} />
+      <ScrollNav 
+        items={navItems} 
+        height={350} 
+        onSectionClick={setClickedSection}
+      />
 
-      {/* Page content with sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <section id="overviewz" className="py-6"></section>
-        <section id="overview" className={`min-h-screen ${paddingTop}`}>
+        <section 
+          id="overviewz" 
+          className={getSectionPadding("overviewz")}
+        />
+        
+        <section 
+          id="overview" 
+          className={`min-h-screen ${getSectionPadding("overview")}`}
+        >
           <h2 className="text-3xl font-bold mb-6">Overview</h2>
           <p className="text-gray-600">
             Our managed services provide comprehensive IT infrastructure
-            management, ensuring your systems run smoothly and efficiently. We
-            offer 24/7 monitoring, proactive maintenance, and rapid issue
-            resolution to minimize downtime and optimize performance.
+            management, ensuring your systems run smoothly and efficiently.
           </p>
         </section>
 
-        <section id="benefits" className="min-h-screen pt-[150px]">
+        <section 
+          id="benefits" 
+          className={`min-h-screen ${getSectionPadding("benefits")}`}
+        >
           <h2 className="text-3xl font-bold mb-6">Benefits</h2>
           <p className="text-gray-600">
             Discover the advantages of our managed services, including reduced
-            operational costs, improved system reliability, enhanced security,
-            and access to expert IT support. Our solutions allow you to focus on
-            your core business while we handle the complexities of IT
-            management.
+            operational costs and improved system reliability.
           </p>
         </section>
 
-        <section id="products" className="min-h-screen pt-[150px]">
+        <section 
+          id="products" 
+          className={`min-h-screen ${getSectionPadding("products")}`}
+        >
           <h2 className="text-3xl font-bold mb-6">Products</h2>
           <p className="text-gray-600">
             Explore our range of managed service solutions, including network
-            management, cloud services, cybersecurity, data backup and recovery,
-            and IT consulting. Each product is designed to address specific
-            business needs and can be customized to fit your unique
-            requirements.
+            management and cloud services.
           </p>
         </section>
 
-        <section id="resources" className="min-h-screen pt-[150px]">
+        <section 
+          id="resources" 
+          className={`min-h-screen ${getSectionPadding("resources")}`}
+        >
           <h2 className="text-3xl font-bold mb-6">Resources</h2>
           <p className="text-gray-600">
             Access documentation, guides, and support materials to help you make
-            the most of our managed services. Find detailed product information,
-            best practices, case studies, and FAQs to support your IT management
-            journey.
+            the most of our managed services.
           </p>
         </section>
       </div>
