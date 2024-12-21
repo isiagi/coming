@@ -1,20 +1,26 @@
-import { ServiceHeader } from "@/components/service-header";
+import SubHeroHeader from "@/components/SubHeroHeader";
 import React from "react";
-
 
 function page() {
   return (
     <div>
-      <ServiceHeader
+      <SubHeroHeader
         title="Software Solutions"
         subtitle="Enterprise-grade IT infrastructure management"
-        image="https://images.unsplash.com/photo-1629654291663-b91ad427698f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tcHV0ZXJzfGVufDB8fDB8fHww"
+        image="/placeholder.svg?height=384&width=384"
         breadcrumbs={[
           { label: "Home", href: "/" },
           {
-            label: "Managed Services",
-            href: "/products-services/managed-services",
+            label: "Software Solutions",
+            href: "/products-services/software-solutions",
           },
+        ]}
+        navItems={[
+          { label: "All", href: "#overviewz" },
+          { label: "Overview", href: "#overview" },
+          { label: "Benefits", href: "#benefits" },
+          { label: "Products", href: "#products" },
+          { label: "Resources", href: "#resources" },
         ]}
       />
     </div>

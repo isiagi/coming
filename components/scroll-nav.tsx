@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useEffect, useState, useRef } from 'react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { debounce } from 'lodash';
+import { useEffect, useState, useRef } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { debounce } from "lodash";
 
 interface ScrollNavProps {
   items: Array<{
@@ -11,12 +11,13 @@ interface ScrollNavProps {
     href: string;
   }>;
   height: number;
-  onSectionClick: (sectionId: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSectionClick: any;
 }
 
 export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
   const [isSticky, setIsSticky] = useState(false);
-  const [activeItem, setActiveItem] = useState('');
+  const [activeItem, setActiveItem] = useState("");
   const scrollingRef = useRef(false);
   const initialLoadRef = useRef(true);
 
@@ -26,11 +27,11 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     const shouldBeSticky = currentScrollY > headerHeight;
 
     setIsSticky(shouldBeSticky);
-    
+
     if (!scrollingRef.current) {
-      const navHeight = isSticky ? 80 : (80 + height); // Adjust offset based on sticky state
-      
-      let currentActive = '';
+      const navHeight = isSticky ? 80 : 80 + height; // Adjust offset based on sticky state
+
+      let currentActive = "";
       for (const { href } of items) {
         const element = document.querySelector(href);
         if (element) {
@@ -41,19 +42,19 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
           }
         }
       }
-      
+
       if (currentActive !== activeItem) {
         setActiveItem(currentActive);
         if (currentActive && !scrollingRef.current && !initialLoadRef.current) {
-          history.replaceState(null, '', currentActive);
+          history.replaceState(null, "", currentActive);
         }
       }
     }
   }, 50);
 
   useEffect(() => {
-    window.addEventListener('scroll', debouncedScroll);
-    
+    window.addEventListener("scroll", debouncedScroll);
+
     // Handle initial hash and prevent URL change on refresh
     const hash = window.location.hash;
     if (hash) {
@@ -64,11 +65,12 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
         const navOffset = 80;
         const totalOffset = headerOffset + navOffset - 10; // Reduced padding
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
-        
+        const offsetPosition =
+          elementPosition + window.pageYOffset - totalOffset;
+
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'instant'
+          behavior: "instant",
         });
       }
     }
@@ -79,7 +81,7 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     }, 500);
 
     return () => {
-      window.removeEventListener('scroll', debouncedScroll);
+      window.removeEventListener("scroll", debouncedScroll);
       debouncedScroll.cancel();
       clearTimeout(timer);
     };
@@ -89,7 +91,7 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     const currentScrollY = window.scrollY;
     const headerHeight = height;
     const shouldBeSticky = currentScrollY > headerHeight;
-    
+
     // Reduced padding in the offset calculation
     return shouldBeSticky ? 50 : 90;
   };
@@ -99,19 +101,20 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     if (!element) return;
 
     scrollingRef.current = true;
-    const offsetPosition = element.getBoundingClientRect().top + 
-      window.pageYOffset - 
+    const offsetPosition =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
       calculateScrollOffset();
 
     window.scrollTo({
       top: offsetPosition,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
 
     setActiveItem(href);
     // Only update URL if not in initial load
     if (!initialLoadRef.current) {
-      history.pushState(null, '', href);
+      history.pushState(null, "", href);
     }
 
     setTimeout(() => {
@@ -119,7 +122,10 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     }, 1000);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const sectionId = href.substring(1);
     onSectionClick(sectionId);
@@ -129,8 +135,8 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
   return (
     <div
       className={cn(
-        'transition-all duration-300 ease-in-out w-full bg-white',
-        isSticky ? 'fixed left-0 right-0 shadow-md z-10 top-16' : ''
+        "transition-all duration-300 ease-in-out w-full bg-white",
+        isSticky ? "fixed left-0 right-0 shadow-md z-10 top-16" : ""
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,10 +148,10 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
                 className={cn(
-                  'inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition-colors',
+                  "inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition-colors",
                   activeItem === item.href
-                    ? 'border-red-600 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    ? "border-red-600 text-gray-900"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 )}
               >
                 {item.label}
