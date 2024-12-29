@@ -4,47 +4,100 @@ import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
 import { useEffect, useState, Suspense } from "react";
+import ITServicesShowcase from "@/components/it-services-showcase-updated";
 
 const navItems = [
-  { label: "All", href: "#overviewz" },
+  // { label: "All", href: "#overviewz" },
   { label: "Overview", href: "#overview" },
-  { label: "Benefits", href: "#benefits" },
-  { label: "Products", href: "#products" },
-  { label: "Resources", href: "#resources" },
+  { label: "IT Consulting", href: "#it-consulting" },
+  { label: "Network management", href: "#network-management" },
+  {
+    label: "Backup and disaster recovery",
+    href: "#backup-and-disaster-recovery",
+  },
+  { label: "Helpdesk support", href: "#helpdesk-support" },
 ];
 
 function ManagedServicesContent() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeSection, setActiveSection] = useState("");
   const [clickedSection, setClickedSection] = useState("");
 
   useEffect(() => {
+    // Function to handle hash changes and initial load
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const sectionId = hash.substring(1);
+        setClickedSection(sectionId);
+
+        // Add a small delay to ensure the padding is applied before scrolling
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const navHeight = 60;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - navHeight;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        }, 100);
+      }
+    };
+
     // Check for hash on initial load
-    const hash = window.location.hash;
-    if (hash) {
-      setClickedSection(hash.substring(1));
-    }
+    handleHashChange();
+
+    // Add event listeners for hash changes
+    window.addEventListener("hashchange", handleHashChange);
 
     const handleScroll = () => {
-      const navHeight = 80; // Reduced from 112 for less spacing
-      
+      const navHeight = 80;
+
       navItems.forEach(({ href }) => {
-        const element = document.querySelector(href);
+        const sectionId = href.substring(1);
+        const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
           if (rect.top <= navHeight + 20 && rect.bottom >= navHeight) {
-            setActiveSection(href.substring(1));
+            setActiveSection(sectionId);
           }
         }
       });
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
+  const handleSectionClick = (sectionId: string) => {
+    setClickedSection(sectionId);
+
+    // Add a small delay to ensure the padding is applied before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navHeight = 60;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  };
+
   const getSectionPadding = (sectionId: string) => {
-    return clickedSection === sectionId ? "pt-28" : ""; // Reduced from pt-28
+    return clickedSection === sectionId ? "pt-28" : "";
   };
 
   return (
@@ -70,61 +123,34 @@ function ManagedServicesContent() {
           },
         ]}
       />
-      <ScrollNav 
-        items={navItems} 
-        height={350} 
-        onSectionClick={setClickedSection}
+      <ScrollNav
+        items={navItems}
+        height={350}
+        onSectionClick={handleSectionClick}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <section 
-          id="overviewz" 
-          className={getSectionPadding("overviewz")}
-        />
-        
-        <section 
-          id="overview" 
+        <section id="overviewz" className={getSectionPadding("overviewz")} />
+
+        <section
+          id="overview"
           className={`min-h-screen ${getSectionPadding("overview")}`}
         >
-          <h2 className="text-3xl font-bold mb-6">Overview</h2>
-          <p className="text-gray-600">
-            Our managed services provide comprehensive IT infrastructure
-            management, ensuring your systems run smoothly and efficiently.
+          <h2 className="text-3xl font-bold mb-6">Managed Services</h2>
+          {/* <p className="text-gray-600">
+            We offer a range of managed services, including network, security,
+            and software support to help businesses stay up and running.
+          </p> */}
+
+          <p>
+            Our comprehensive managed services provide a cost-effective way for
+            organizations to outsource the management and maintenance of their
+            IT systems. We offer tailored solutions to meet your specific needs,
+            whether you&apos;re a small business or a large enterprise.
           </p>
         </section>
 
-        <section 
-          id="benefits" 
-          className={`min-h-screen ${getSectionPadding("benefits")}`}
-        >
-          <h2 className="text-3xl font-bold mb-6">Benefits</h2>
-          <p className="text-gray-600">
-            Discover the advantages of our managed services, including reduced
-            operational costs and improved system reliability.
-          </p>
-        </section>
-
-        <section 
-          id="products" 
-          className={`min-h-screen ${getSectionPadding("products")}`}
-        >
-          <h2 className="text-3xl font-bold mb-6">Products</h2>
-          <p className="text-gray-600">
-            Explore our range of managed service solutions, including network
-            management and cloud services.
-          </p>
-        </section>
-
-        <section 
-          id="resources" 
-          className={`min-h-screen ${getSectionPadding("resources")}`}
-        >
-          <h2 className="text-3xl font-bold mb-6">Resources</h2>
-          <p className="text-gray-600">
-            Access documentation, guides, and support materials to help you make
-            the most of our managed services.
-          </p>
-        </section>
+        <ITServicesShowcase getSectionPadding={getSectionPadding} />
       </div>
     </>
   );
