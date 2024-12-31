@@ -31,6 +31,18 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
     if (!scrollingRef.current) {
       const navHeight = isSticky ? 80 : 80 + height; // Adjust offset based on sticky state
 
+      // If at the top of the page (with small threshold), set first item as active
+      if (currentScrollY < 50) {
+        const firstItemHref = items[0]?.href || "";
+        if (activeItem !== firstItemHref) {
+          setActiveItem(firstItemHref);
+          if (!initialLoadRef.current) {
+            history.replaceState(null, "", firstItemHref);
+          }
+        }
+        return;
+      }
+
       let currentActive = "";
       for (const { href } of items) {
         const element = document.querySelector(href);
@@ -73,6 +85,9 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
           behavior: "instant",
         });
       }
+    } else {
+      // If no hash, set first item as active
+      setActiveItem(items[0]?.href || "");
     }
 
     // Set initial load to false after a short delay
@@ -135,6 +150,7 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
   return (
     <div
       className={cn(
+        "hidden md:block",
         "transition-all duration-300 ease-in-out w-full bg-white",
         isSticky ? "fixed left-0 right-0 shadow-md z-10 top-16" : ""
       )}

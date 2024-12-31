@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import AboutSection from "@/components/about-section";
 import MissionVisionValues from "@/components/mission-vision-values-alternating";
@@ -45,12 +45,18 @@ function About() {
   }, []);
 
   const getSectionPadding = (sectionId: string) => {
+    console.log(clickedSection, sectionId);
+
     return clickedSection === sectionId ? "pt-28" : ""; // Reduced from pt-28
   };
 
   return (
-    <div className="mt-[64px]">
-      <ScrollNav items={navItems} height={0} onSectionClick={setClickedSection} />
+    <div>
+      {/* <ScrollNav
+        items={navItems}
+        height={0}
+        onSectionClick={setClickedSection}
+      /> */}
       <ServiceHeader
         title="About Us"
         subtitle="Enterprise-grade IT infrastructure management"
@@ -64,7 +70,7 @@ function About() {
         ]}
       />
       <AboutSection />
-      <MissionVisionValues getSectionPadding={getSectionPadding}/>
+      <MissionVisionValues getSectionPadding={getSectionPadding} />
       <section
         id="mission"
         className={`min-h-screen ${getSectionPadding("mission")}`}
@@ -72,12 +78,12 @@ function About() {
 
       <section
         id="vision"
-        className={`min-h-screen ${getSectionPadding("mission")}`}
+        className={`min-h-screen ${getSectionPadding("vision")}`}
       ></section>
 
       <section
         id="core-values"
-        className={`min-h-screen ${getSectionPadding("mission")}`}
+        className={`min-h-screen ${getSectionPadding("core-values")}`}
       ></section>
     </div>
   );

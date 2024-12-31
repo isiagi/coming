@@ -1,37 +1,52 @@
 "use client";
 
+import { useEffect, useState, Suspense } from "react";
 import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
-import { useEffect, useState, Suspense } from "react";
-import ITServicesShowcase from "@/components/it-services-showcase-updated";
-import { managed } from "@/lib/servicesData";
 
-const navItems = [
-  { label: "", href: "#all" },
+interface Breadcrumb {
+  label: string;
+  href: string;
+}
 
-  { label: "IT Consulting", href: "#it-consulting" },
-  { label: "Network management", href: "#network-management" },
-  {
-    label: "Backup and disaster recovery",
-    href: "#backup-and-disaster-recovery",
-  },
-  { label: "Helpdesk support", href: "#helpdesk-support" },
-];
+interface NavItem {
+  label: string;
+  href: string;
+}
 
-function ManagedServicesContent() {
+interface ServicePageLayoutProps {
+  title: string;
+  subtitle: string;
+  headerImage: string;
+  breadcrumbs: Breadcrumb[];
+  navItems: NavItem[];
+  overview?: {
+    title: string;
+    content: string;
+  };
+  children: React.ReactNode;
+}
+
+function ServicePageContent({
+  title,
+  subtitle,
+  headerImage,
+  breadcrumbs,
+  navItems,
+  overview,
+  children,
+}: ServicePageLayoutProps) {
   const [activeSection, setActiveSection] = useState("");
   const [clickedSection, setClickedSection] = useState("");
 
   useEffect(() => {
-    // Function to handle hash changes and initial load
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash) {
         const sectionId = hash.substring(1);
         setClickedSection(sectionId);
 
-        // Add a small delay to ensure the padding is applied before scrolling
         setTimeout(() => {
           const element = document.getElementById(sectionId);
           if (element) {
@@ -49,10 +64,7 @@ function ManagedServicesContent() {
       }
     };
 
-    // Check for hash on initial load
     handleHashChange();
-
-    // Add event listeners for hash changes
     window.addEventListener("hashchange", handleHashChange);
 
     const handleScroll = () => {
@@ -76,12 +88,11 @@ function ManagedServicesContent() {
       window.removeEventListener("hashchange", handleHashChange);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [navItems]);
 
   const handleSectionClick = (sectionId: string) => {
     setClickedSection(sectionId);
 
-    // Add a small delay to ensure the padding is applied before scrolling
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -103,26 +114,12 @@ function ManagedServicesContent() {
 
   return (
     <>
-      <SubNav
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          {
-            label: "Managed Services",
-            href: "/products-services/managed-services",
-          },
-        ]}
-      />
+      <SubNav breadcrumbs={breadcrumbs} />
       <ServiceHeader
-        title="Managed Services"
-        subtitle="Enterprise-grade IT infrastructure management"
-        image="/placeholder.svg?height=384&width=384"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          {
-            label: "Managed Services",
-            href: "/products-services/managed-services",
-          },
-        ]}
+        title={title}
+        subtitle={subtitle}
+        image={headerImage}
+        breadcrumbs={breadcrumbs}
       />
       <ScrollNav
         items={navItems}
@@ -131,36 +128,23 @@ function ManagedServicesContent() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        {/* <section id="overviewz" className={getSectionPadding("overviewz")} /> */}
+        {overview && (
+          <section id="all" className="min-h-[10vh]">
+            <h2 className="text-3xl font-bold mb-6">{overview.title}</h2>
+            <p>{overview.content}</p>
+          </section>
+        )}
 
-        <section id="all" className={`min-h-[10vh] bg-red-400`}>
-          <h2 className="text-3xl font-bold mb-6">Managed Services</h2>
-          {/* <p className="text-gray-600">
-            We offer a range of managed services, including network, security,
-            and software support to help businesses stay up and running.
-          </p> */}
-
-          <p>
-            Our comprehensive managed services provide a cost-effective way for
-            organizations to outsource the management and maintenance of their
-            IT systems. We offer tailored solutions to meet your specific needs,
-            whether you&apos;re a small business or a large enterprise.
-          </p>
-        </section>
-
-        <ITServicesShowcase
-          getSectionPadding={getSectionPadding}
-          serviceData={managed}
-        />
+        {children}
       </div>
     </>
   );
 }
 
-export default function ManagedServicesPage() {
+export default function ServicePageLayout(props: ServicePageLayoutProps) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ManagedServicesContent />
+      <ServicePageContent {...props} />
     </Suspense>
   );
 }

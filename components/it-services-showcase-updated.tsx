@@ -29,13 +29,13 @@ const FeatureCard = ({
       <CardContent className="flex-grow flex flex-col justify-between">
         <div>
           <p className="mb-4 text-lg">{description}</p>
-          <div className="relative w-full h-64 mb-6">
+          <div className="relative w-full h-96 mb-6">
             <Image
               src={imageSrc}
               layout="fill"
               objectFit="cover"
               alt={title}
-              className="rounded-md"
+              className="rounded-md "
             />
           </div>
           <h3 className="text-xl font-semibold mb-2">Key Benefits:</h3>
@@ -121,14 +121,17 @@ const SoftwareDevelopmentProcess = () => (
   </div>
 );
 
-export default function ITServicesShowcase({ getSectionPadding }) {
+export default function ITServicesShowcase({ getSectionPadding, serviceData }) {
   return (
     <div className="container mx-auto py-8">
       {/* <h1 className="text-4xl font-bold mb-8 text-center">Our IT Services</h1> */}
-      {services.map((service, index) => (
-        <div key={index}>
-          <ServiceSection {...service} getSectionPadding={getSectionPadding} />
-          {service.title === "Software Solutions" && (
+      {
+        <div>
+          <ServiceSection
+            {...serviceData}
+            getSectionPadding={getSectionPadding}
+          />
+          {serviceData.title === "Software Solutions" && (
             <div className="mb-12">
               <h3 className="text-2xl font-semibold mb-4">
                 Our Development Process
@@ -141,7 +144,7 @@ export default function ITServicesShowcase({ getSectionPadding }) {
             </div>
           )}
         </div>
-      ))}
+      }
     </div>
   );
 }
