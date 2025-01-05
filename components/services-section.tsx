@@ -1,62 +1,78 @@
-import { Shield, Cloud, Layout, Server } from 'lucide-react'
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  Shield,
+  BarChart,
+  Code,
+  Cloud,
+  Server,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function ServicesSection() {
-  const services = [
-    {
-      title: "Hacking & Security Solutions",
-      description: "Comprehensive cybersecurity services to protect your digital assets and infrastructure from evolving threats.",
-      icon: Shield,
-    },
-    {
-      title: "IT Deployment and Migration",
-      description: "Seamless transition and deployment services ensuring minimal disruption to your business operations.",
-      icon: Server,
-    },
-    {
-      title: "Managed Web Application",
-      description: "End-to-end web application management services for optimal performance and security.",
-      icon: Layout,
-    },
-    {
-      title: "IT & Cloud Management",
-      description: "Expert cloud solutions and IT management to drive your business forward efficiently.",
-      icon: Cloud,
-    },
-  ]
+const services = [
+  {
+    title: "Managed Services",
+    description:
+      "Comprehensive IT management and support for your business infrastructure.",
+    icon: Server,
+  },
+  {
+    title: "Cybersecurity",
+    description:
+      "Protect your digital assets with our advanced cybersecurity solutions.",
+    icon: Shield,
+  },
+  {
+    title: "Data Analytics",
+    description:
+      "Unlock the power of your data with our cutting-edge analytics services.",
+    icon: BarChart,
+  },
+  {
+    title: "Software Solutions",
+    description: "Custom software development tailored to your business needs.",
+    icon: Code,
+  },
+  {
+    title: "Cloud Computing",
+    description: "Scalable and flexible cloud solutions for modern businesses.",
+    icon: Cloud,
+  },
+];
 
+export function ServicesSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-slate-950">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white">
-            Our Company Services
-          </h2>
-          <p className="max-w-[900px] text-zinc-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Delivering innovative solutions to transform your business with cutting-edge technology and expert services.
-          </p>
-        </div>
-        <div className="grid gap-6 mt-12 md:grid-cols-2 lg:gap-12">
-          {services.map((service) => (
-            <Card key={service.title} className="border-0 bg-slate-900/50 backdrop-blur-sm">
-              <CardContent className="flex gap-4 p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-600/10">
-                  <service.icon className="h-6 w-6 text-purple-600" />
+    <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          Our Services
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {services.map((service, index) => (
+            <div
+              key={service.title}
+              className={`bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
+                index === 0
+                  ? "md:col-span-2"
+                  : index < 3
+                  ? "md:col-span-1"
+                  : "col-span-1 md:col-span-2"
+              }`}
+            >
+              <div>
+                <div className="flex items-center mb-4">
+                  <service.icon className="w-8 h-8 text-blue-600 mr-3" />
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
                 </div>
-                <div className="space-y-2">
-                  <h3 className="font-bold text-xl text-white">
-                    {service.title}
-                  </h3>
-                  <p className="text-zinc-400">
-                    {service.description}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                <p className="text-gray-600 mb-6">{service.description}</p>
+              </div>
+              <Button className="self-start">
+                View Service
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
-

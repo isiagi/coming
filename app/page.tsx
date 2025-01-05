@@ -1,14 +1,17 @@
+import { ServicesSection } from "../components/services-section";
+import { Banner } from "../components/banner";
+import { AboutCompany } from "../components/about-company";
+import { NewsAndEvents } from "../components/news-and-events";
 import IntelligentWorldCarousel from "@/components/carousel";
-import ServicesSection from "@/components/services-section";
-// import ComingSoon from "@/components/coming-soon";
-
 
 export default function Home() {
   return (
-    <div className="mt-[64px]">
+    <main className="mt-[64px]">
       <IntelligentWorldCarousel />
-      {/* <ComingSoon /> */}
       <ServicesSection />
-    </div>
+      <Banner />
+      <AboutCompany />
+      <NewsAndEvents />
+    </main>
   );
 }
