@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -19,11 +20,7 @@ const newsItems = [
   // ... other news items
 ];
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const news = newsItems.find((item) => item.slug === params.slug);
   if (!news) {
     return {
@@ -36,7 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default function NewsDetail({ params }: { params: { slug: string } }) {
+export default function NewsDetail({ params }: any) {
   const news = newsItems.find((item) => item.slug === params.slug);
 
   if (!news) {

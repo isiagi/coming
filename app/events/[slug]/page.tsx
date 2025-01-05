@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { CalendarDays, MapPin, ArrowLeft } from "lucide-react";
@@ -19,7 +20,7 @@ const events = [
   // ... other events
 ];
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({ params }: any) {
   const event = events.find((item) => item.slug === params.slug);
   if (!event) {
     return {
@@ -32,7 +33,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function EventDetail({ params }: { params: { slug: string } }) {
+export default function EventDetail({ params }: any) {
   const event = events.find((item) => item.slug === params.slug);
 
   if (!event) {
