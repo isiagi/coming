@@ -2,7 +2,7 @@
 
 import AboutSection from "@/components/about-section";
 import MissionVisionValues from "@/components/mission-vision-values-alternating";
-import { ScrollNav } from "@/components/scroll-nav";
+// import { ScrollNav } from "@/components/scroll-nav";
 import { ServiceHeader } from "@/components/service-header";
 import React, { useEffect, useState } from "react";
 

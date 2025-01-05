@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useEffect, useState, Suspense } from "react";
@@ -108,9 +109,9 @@ function ServicePageContent({
     }, 100);
   };
 
-  const getSectionPadding = (sectionId: string) => {
-    return clickedSection === sectionId ? "pt-28" : "";
-  };
+  // const getSectionPadding = (sectionId: string) => {
+  //   return clickedSection === sectionId ? "pt-28" : "";
+  // };
 
   return (
     <>

@@ -1,147 +1,137 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { debounce } from "lodash";
+// import { Button } from "@/components/ui/button";
 
-interface ScrollNavProps {
-  items: Array<{
-    label: string;
-    href: string;
-  }>;
-  height: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSectionClick: any;
-}
+// interface ScrollNavProps {
+//   items: Array<{
+//     label: string;
+//     href: string;
+//   }>;
+//   height: number;
+//   onSectionClick: (sectionId: string) => void;
+// }
 
-export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
+export function ScrollNav({ items, height, onSectionClick }: any) {
   const [isSticky, setIsSticky] = useState(false);
   const [activeItem, setActiveItem] = useState("");
-  const scrollingRef = useRef(false);
   const initialLoadRef = useRef(true);
+  const scrollingRef = useRef(false);
+  const navRef = useRef<HTMLDivElement>(null);
+  const mainNavHeight = 64;
 
-  const debouncedScroll = debounce(() => {
+  const calculateOffset = useCallback(() => {
+    const navHeight = navRef.current?.offsetHeight || 64;
+    return isSticky ? mainNavHeight + navHeight : height + navHeight;
+  }, [height, isSticky]);
+
+  const updateNavState = useCallback(() => {
+    if (scrollingRef.current) return;
+
     const currentScrollY = window.scrollY;
-    const headerHeight = height;
-    const shouldBeSticky = currentScrollY > headerHeight;
-
+    const shouldBeSticky = currentScrollY >= height - mainNavHeight;
     setIsSticky(shouldBeSticky);
 
-    if (!scrollingRef.current) {
-      const navHeight = isSticky ? 80 : 80 + height; // Adjust offset based on sticky state
+    // Only update active section if nav is sticky
+    if (shouldBeSticky) {
+      const offset = calculateOffset();
+      const sections = items
+        .map((item: any) => ({
+          href: item.href,
+          element: document.querySelector(item.href),
+        }))
+        .filter(
+          (item: any): item is { href: string; element: Element } =>
+            !!item.element
+        );
 
-      // If at the top of the page (with small threshold), set first item as active
-      if (currentScrollY < 50) {
+      let foundActive = false;
+      for (const { href, element } of sections) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= offset && rect.bottom > offset) {
+          if (activeItem !== href && !scrollingRef.current) {
+            setActiveItem(href);
+            if (!initialLoadRef.current) {
+              window.history.replaceState(
+                null,
+                "",
+                window.location.pathname + href
+              );
+            }
+          }
+          foundActive = true;
+          break;
+        }
+      }
+
+      if (!foundActive && currentScrollY < height) {
         const firstItemHref = items[0]?.href || "";
         if (activeItem !== firstItemHref) {
           setActiveItem(firstItemHref);
-          if (!initialLoadRef.current) {
-            history.replaceState(null, "", firstItemHref);
-          }
         }
-        return;
-      }
-
-      let currentActive = "";
-      for (const { href } of items) {
-        const element = document.querySelector(href);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= navHeight + 20 && rect.bottom >= navHeight) {
-            currentActive = href;
-            break;
-          }
-        }
-      }
-
-      if (currentActive !== activeItem) {
-        setActiveItem(currentActive);
-        if (currentActive && !scrollingRef.current && !initialLoadRef.current) {
-          history.replaceState(null, "", currentActive);
-        }
-      }
-    }
-  }, 50);
-
-  useEffect(() => {
-    window.addEventListener("scroll", debouncedScroll);
-
-    // Handle initial hash and prevent URL change on refresh
-    const hash = window.location.hash;
-    if (hash) {
-      setActiveItem(hash);
-      const element = document.querySelector(hash);
-      if (element) {
-        const headerOffset = 40;
-        const navOffset = 80;
-        const totalOffset = headerOffset + navOffset - 10; // Reduced padding
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - totalOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "instant",
-        });
       }
     } else {
-      // If no hash, set first item as active
-      setActiveItem(items[0]?.href || "");
+      // Clear active item when not sticky
+      setActiveItem("");
     }
+  }, [items, height, activeItem, calculateOffset]);
 
-    // Set initial load to false after a short delay
-    const timer = setTimeout(() => {
-      initialLoadRef.current = false;
-    }, 500);
-
-    return () => {
-      window.removeEventListener("scroll", debouncedScroll);
-      debouncedScroll.cancel();
-      clearTimeout(timer);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollingRef.current) {
+        updateNavState();
+      }
     };
-  }, [height, items]);
 
-  const calculateScrollOffset = () => {
-    const currentScrollY = window.scrollY;
-    const headerHeight = height;
-    const shouldBeSticky = currentScrollY > headerHeight;
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    initialLoadRef.current = false;
 
-    // Reduced padding in the offset calculation
-    return shouldBeSticky ? 50 : 90;
-  };
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [updateNavState]);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (!element) return;
+  const scrollToSection = useCallback(
+    (href: string, isInitial = false) => {
+      // Only scroll if nav is sticky
+      if (!isSticky) return;
 
-    scrollingRef.current = true;
-    const offsetPosition =
-      element.getBoundingClientRect().top +
-      window.pageYOffset -
-      calculateScrollOffset();
+      const element = document.querySelector(href);
+      if (!element) return;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
+      scrollingRef.current = true;
+      const offset = calculateOffset();
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const targetPosition = elementPosition - offset + 2;
 
-    setActiveItem(href);
-    // Only update URL if not in initial load
-    if (!initialLoadRef.current) {
-      history.pushState(null, "", href);
-    }
+      setActiveItem(href);
+      if (!initialLoadRef.current) {
+        window.history.pushState(null, "", window.location.pathname + href);
+      }
 
-    setTimeout(() => {
-      scrollingRef.current = false;
-    }, 1000);
-  };
+      window.scrollTo({
+        top: targetPosition,
+        behavior: isInitial ? "instant" : "smooth",
+      });
+
+      setTimeout(() => {
+        scrollingRef.current = false;
+        updateNavState();
+      }, 1000);
+    },
+    [calculateOffset, updateNavState, isSticky]
+  );
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
+    // Only handle click if nav is sticky
+    if (!isSticky) return;
+
     const sectionId = href.substring(1);
     onSectionClick(sectionId);
     scrollToSection(href);
@@ -149,32 +139,34 @@ export function ScrollNav({ items, height, onSectionClick }: ScrollNavProps) {
 
   return (
     <div
+      ref={navRef}
       className={cn(
-        "hidden md:block",
-        "transition-all duration-300 ease-in-out w-full bg-white",
-        isSticky ? "fixed left-0 right-0 shadow-md z-10 top-16" : ""
+        "scroll-nav hidden md:block transition-all duration-300 ease-in-out w-full bg-white",
+        isSticky ? "fixed left-0 right-0 shadow-md z-10 top-16" : "relative"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <nav className="flex space-x-8">
-            {items.map((item) => (
+          <nav className="flex space-x-8" aria-label="Page sections">
+            {items.map((item: any) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
                 className={cn(
                   "inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition-colors",
+                  !isSticky && "pointer-events-none opacity-50",
                   activeItem === item.href
                     ? "border-red-600 text-gray-900"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 )}
+                aria-current={activeItem === item.href ? "page" : undefined}
               >
                 {item.label}
               </a>
             ))}
           </nav>
-          <Button variant="destructive">GET PRICING/INFO</Button>
+          {/* <Button variant="destructive">GET PRICING/INFO</Button> */}
         </div>
       </div>
     </div>

@@ -1,20 +1,30 @@
-import { Shield, BarChart, Code, Cloud, Server, ArrowRight } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import {
+  Shield,
+  BarChart,
+  Code,
+  Cloud,
+  Server,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
     title: "Managed Services",
-    description: "Comprehensive IT management and support for your business infrastructure.",
+    description:
+      "Comprehensive IT management and support for your business infrastructure.",
     icon: Server,
   },
   {
     title: "Cybersecurity",
-    description: "Protect your digital assets with our advanced cybersecurity solutions.",
+    description:
+      "Protect your digital assets with our advanced cybersecurity solutions.",
     icon: Shield,
   },
   {
     title: "Data Analytics",
-    description: "Unlock the power of your data with our cutting-edge analytics services.",
+    description:
+      "Unlock the power of your data with our cutting-edge analytics services.",
     icon: BarChart,
   },
   {
@@ -27,20 +37,25 @@ const services = [
     description: "Scalable and flexible cloud solutions for modern businesses.",
     icon: Cloud,
   },
-]
+];
 
 export function ServicesSection() {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          Our Services
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={service.title}
               className={`bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
-                index === 0 ? "md:col-span-2" : 
-                index < 3 ? "md:col-span-1" : 
-                "col-span-1 md:col-span-2"
+                index === 0
+                  ? "md:col-span-2"
+                  : index < 3
+                  ? "md:col-span-1"
+                  : "col-span-1 md:col-span-2"
               }`}
             >
               <div>
@@ -59,6 +74,5 @@ export function ServicesSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

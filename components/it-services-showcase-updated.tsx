@@ -1,14 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { services } from "@/lib/servicesData";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FeatureCard = ({
   icon: Icon,
@@ -19,7 +12,7 @@ const FeatureCard = ({
   potentialOutcomes,
   id,
   getSectionPadding,
-}) => (
+}: any) => (
   <div id={id} className={`${getSectionPadding?.(id) || ""}`}>
     <Card className="mb-6 w-full min-h-screen flex flex-col">
       <CardHeader className="flex flex-row items-center space-x-2">
@@ -40,7 +33,7 @@ const FeatureCard = ({
           </div>
           <h3 className="text-xl font-semibold mb-2">Key Benefits:</h3>
           <ul className="list-disc pl-5 mb-4">
-            {benefits.map((benefit, index) => (
+            {benefits.map((benefit: any, index: any) => (
               <li key={index} className="mb-2">
                 {benefit}
               </li>
@@ -49,7 +42,7 @@ const FeatureCard = ({
           <h3 className="text-xl font-semibold mb-2">Potential Outcomes:</h3>
           <p className="mb-4">{potentialOutcomes.description}</p>
           <ul className="list-disc pl-5">
-            {potentialOutcomes.results.map((result, index) => (
+            {potentialOutcomes.results.map((result: any, index: any) => (
               <li key={index} className="mb-2">
                 {result}
               </li>
@@ -62,8 +55,8 @@ const FeatureCard = ({
           </h3>
           <p>
             Our team of experts brings years of experience and cutting-edge
-            knowledge to every project. We're committed to delivering tailored
-            solutions that drive your business forward.
+            knowledge to every project. We&apos;re committed to delivering
+            tailored solutions that drive your business forward.
           </p>
         </div>
       </CardContent>
@@ -71,17 +64,12 @@ const FeatureCard = ({
   </div>
 );
 
-const ServiceSection = ({
-  title,
-  description,
-  features,
-  getSectionPadding,
-}) => (
+const ServiceSection = ({ features, getSectionPadding }: any) => (
   <div className="mb-12">
     {/* <h2 className="text-3xl font-bold mb-4">{title}</h2>
     <p className="mb-6 text-xl">{description}</p> */}
     <div className="space-y-12">
-      {features.map((feature, index) => (
+      {features.map((feature: any, index: any) => (
         <FeatureCard
           key={index}
           {...feature}
@@ -121,7 +109,10 @@ const SoftwareDevelopmentProcess = () => (
   </div>
 );
 
-export default function ITServicesShowcase({ getSectionPadding, serviceData }) {
+export default function ITServicesShowcase({
+  getSectionPadding,
+  serviceData,
+}: any) {
   return (
     <div className="container mx-auto py-8">
       {/* <h1 className="text-4xl font-bold mb-8 text-center">Our IT Services</h1> */}

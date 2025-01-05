@@ -1,7 +1,7 @@
-import { CalendarDays, ChevronRight, Newspaper } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import Link from 'next/link'
-import Image from 'next/image'
+import { CalendarDays, ChevronRight, Newspaper } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
 
 type NewsItem = {
   slug: string;
@@ -9,7 +9,7 @@ type NewsItem = {
   date: string;
   excerpt: string;
   image: string;
-}
+};
 
 type Event = {
   slug: string;
@@ -17,31 +17,37 @@ type Event = {
   date: string;
   location: string;
   image: string;
-}
+};
 
 const newsItems: NewsItem[] = [
   {
     slug: "dst-launches-new-cloud-security-solution",
     title: "DST Launches New Cloud Security Solution",
     date: "2023-06-15",
-    excerpt: "Datahub Systems Technologies introduces a state-of-the-art cloud security platform, enhancing data protection for businesses.",
-    image: "/placeholder.svg?height=200&width=400"
+    excerpt:
+      "Datahub Systems Technologies introduces a state-of-the-art cloud security platform, enhancing data protection for businesses.",
+    image:
+      "https://images.unsplash.com/photo-1667984390527-850f63192709?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdWQlMjBjb21wdXRpbmd8ZW58MHx8MHx8fDA%3D",
   },
   {
     slug: "dst-partners-with-leading-ai-research-institute",
     title: "DST Partners with Leading AI Research Institute",
     date: "2023-05-28",
-    excerpt: "A new partnership aims to bring cutting-edge AI technologies to DST's software solutions.",
-    image: "/placeholder.svg?height=200&width=400"
+    excerpt:
+      "A new partnership aims to bring cutting-edge AI technologies to DST's software solutions.",
+    image:
+      "https://plus.unsplash.com/premium_photo-1683121718643-fb18d2668d53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8QUl8ZW58MHx8MHx8fDA%3D",
   },
   {
     slug: "dst-recognized-as-top-it-service-provider",
     title: "DST Recognized as Top IT Service Provider",
     date: "2023-05-10",
-    excerpt: "Industry analysts rank Datahub Systems Technologies among the top IT service providers for small and medium businesses.",
-    image: "/placeholder.svg?height=200&width=400"
+    excerpt:
+      "Industry analysts rank Datahub Systems Technologies among the top IT service providers for small and medium businesses.",
+    image:
+      "https://images.unsplash.com/photo-1573165706511-3ffde6ef1fe3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fElUfGVufDB8fDB8fHww",
   },
-]
+];
 
 const events: Event[] = [
   {
@@ -49,23 +55,26 @@ const events: Event[] = [
     title: "DST Annual Tech Conference",
     date: "2023-09-20",
     location: "Virtual Event",
-    image: "/placeholder.svg?height=200&width=400"
+    image:
+      "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGNvbmZlcmVuY2V8ZW58MHx8MHx8fDA%3D",
   },
   {
     slug: "cybersecurity-workshop",
     title: "Cybersecurity Workshop",
     date: "2023-08-05",
     location: "New York, NY",
-    image: "/placeholder.svg?height=200&width=400"
+    image:
+      "https://plus.unsplash.com/premium_photo-1674506653774-6f51d6ebe799?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGN5YmVyc2VjdXJpdHl8ZW58MHx8MHx8fDA%3D",
   },
   {
     slug: "cloud-computing-seminar",
     title: "Cloud Computing Seminar",
     date: "2023-07-15",
     location: "San Francisco, CA",
-    image: "/placeholder.svg?height=200&width=400"
+    image:
+      "https://media.istockphoto.com/id/1710421116/photo/businessman-with-cloud-computing-diagram-show-on-virtual-screen-cloud-technology-data-storage.webp?a=1&b=1&s=612x612&w=0&k=20&c=zzZgxmDPL_wao3XSXbodsADBqgPqP23MG_SgRn6zeQ8=",
   },
-]
+];
 
 export function NewsAndEvents() {
   return (
@@ -80,7 +89,10 @@ export function NewsAndEvents() {
             </h3>
             <div className="space-y-6">
               {newsItems.map((item, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                >
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -110,7 +122,10 @@ export function NewsAndEvents() {
             </h3>
             <div className="space-y-6">
               {events.map((event, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                >
                   <Image
                     src={event.image}
                     alt={event.title}
@@ -119,9 +134,15 @@ export function NewsAndEvents() {
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
-                    <h4 className="text-xl font-semibold mb-2">{event.title}</h4>
-                    <p className="text-sm text-gray-500 mb-1">Date: {event.date}</p>
-                    <p className="text-sm text-gray-500 mb-4">Location: {event.location}</p>
+                    <h4 className="text-xl font-semibold mb-2">
+                      {event.title}
+                    </h4>
+                    <p className="text-sm text-gray-500 mb-1">
+                      Date: {event.date}
+                    </p>
+                    <p className="text-sm text-gray-500 mb-4">
+                      Location: {event.location}
+                    </p>
                     <Button variant="outline" size="sm" asChild>
                       <Link href={`/events/${event.slug}`}>
                         Learn More
@@ -136,6 +157,5 @@ export function NewsAndEvents() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

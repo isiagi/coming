@@ -1,14 +1,10 @@
 "use client";
 
-import { ServiceHeader } from "@/components/service-header";
-import { ScrollNav } from "@/components/scroll-nav";
-import SubNav from "@/components/subNav";
-import { useEffect, useState, Suspense } from "react";
-import ITServicesShowcase from "@/components/it-services-showcase-updated";
-import { cloud, cybersecurity } from "@/lib/servicesData";
+import { cloud } from "@/lib/servicesData";
+import ServicePage from "@/components/service-page";
 
 const navItems = [
-  { label: "", href: "#all" },
+  { label: "Overview", href: "#overview" },
 
   {
     label: "Smooth migration",
@@ -28,148 +24,43 @@ const navItems = [
   },
 ];
 
-function ManagedServicesContent() {
-  const [activeSection, setActiveSection] = useState("");
-  const [clickedSection, setClickedSection] = useState("");
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  {
+    label: "Cloud Computing",
+    href: "/products-services/cloud-computing",
+  },
+];
 
-  useEffect(() => {
-    // Function to handle hash changes and initial load
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const sectionId = hash.substring(1);
-        setClickedSection(sectionId);
-
-        // Add a small delay to ensure the padding is applied before scrolling
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            const navHeight = 60;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition =
-              elementPosition + window.pageYOffset - navHeight;
-
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth",
-            });
-          }
-        }, 100);
-      }
-    };
-
-    // Check for hash on initial load
-    handleHashChange();
-
-    // Add event listeners for hash changes
-    window.addEventListener("hashchange", handleHashChange);
-
-    const handleScroll = () => {
-      const navHeight = 80;
-
-      navItems.forEach(({ href }) => {
-        const sectionId = href.substring(1);
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= navHeight + 20 && rect.bottom >= navHeight) {
-            setActiveSection(sectionId);
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const handleSectionClick = (sectionId: string) => {
-    setClickedSection(sectionId);
-
-    // Add a small delay to ensure the padding is applied before scrolling
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const navHeight = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
-    }, 100);
-  };
-
-  const getSectionPadding = (sectionId: string) => {
-    return clickedSection === sectionId ? "pt-28" : "";
-  };
-
-  return (
-    <>
-      <SubNav
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          {
-            label: "Managed Services",
-            href: "/products-services/managed-services",
-          },
-        ]}
-      />
-      <ServiceHeader
-        title="Managed Services"
-        subtitle="Enterprise-grade IT infrastructure management"
-        image="/placeholder.svg?height=384&width=384"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          {
-            label: "Managed Services",
-            href: "/products-services/managed-services",
-          },
-        ]}
-      />
-      <ScrollNav
-        items={navItems}
-        height={350}
-        onSectionClick={handleSectionClick}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        {/* <section id="overviewz" className={getSectionPadding("overviewz")} /> */}
-
-        <section id="all" className={`min-h-[10vh] bg-red-400`}>
-          <h2 className="text-3xl font-bold mb-6">Managed Services</h2>
-          {/* <p className="text-gray-600">
-            We offer a range of managed services, including network, security,
-            and software support to help businesses stay up and running.
-          </p> */}
-
-          <p>
-            Our comprehensive managed services provide a cost-effective way for
-            organizations to outsource the management and maintenance of their
-            IT systems. We offer tailored solutions to meet your specific needs,
-            whether you&apos;re a small business or a large enterprise.
-          </p>
-        </section>
-
-        <ITServicesShowcase
-          getSectionPadding={getSectionPadding}
-          serviceData={cloud}
-        />
-      </div>
-    </>
-  );
-}
+const overviewContent = (
+  <>
+    <p className="text-gray-600 mb-4">
+      Our cloud computing services offer a wide range of solutions to meet the
+      needs of businesses of all sizes. From simple web hosting to complex
+      enterprise-level solutions, we have the expertise and resources to deliver
+      the cloud computing services you need.
+    </p>
+    <p className="text-gray-600 mb-4">Our cloud computing services include:</p>
+    <ul className="list-disc pl-6 text-gray-600">
+      <li>Cloud hosting services</li>
+      <li>Cloud-based databases</li>
+      <li>Cloud-based storage solutions</li>
+      <li>Cloud-based networking solutions</li>
+      <li>Cloud-based security solutions</li>
+    </ul>
+  </>
+);
 
 export default function ManagedServicesPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ManagedServicesContent />
-    </Suspense>
+    <ServicePage
+      title="Cloud Computing"
+      subtitle="Cloud computing solutions for businesses of all sizes"
+      image="https://media.istockphoto.com/id/2162026367/photo/cloud-computing-sign-digital-technology-data-concept-on-cpu.webp?a=1&b=1&s=612x612&w=0&k=20&c=AwdW-zyV3AAUfZL26f8pkU0yo7tgj-kwly0anzTEKwE="
+      breadcrumbs={breadcrumbs}
+      navItems={navItems}
+      serviceData={cloud}
+      overviewContent={overviewContent}
+    />
   );
 }

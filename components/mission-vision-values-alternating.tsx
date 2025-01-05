@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+
 import CoreValues from "./core-values";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

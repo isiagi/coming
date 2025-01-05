@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Server, Shield, BarChart3, Cloud, Code } from "lucide-react";
 import { ValueCard } from "@/components/value-card";
@@ -8,7 +9,7 @@ export default function SupportPage() {
     <div className="container mx-auto py-12 px-4 mt-16">
       <div className="text-center mb-12">
         <img
-          src="/placeholder.svg?height=100&width=100"
+          src="https://plus.unsplash.com/premium_photo-1661914978519-52a11fe159a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9nb3xlbnwwfHwwfHx8MA%3D%3D"
           alt="DST Logo"
           className="mx-auto mb-4"
           width={100}
@@ -16,8 +17,8 @@ export default function SupportPage() {
         />
         <h1 className="text-4xl font-bold mb-4">Welcome to DST Support</h1>
         <p className="text-lg">
-          We're here to help you with all your technology needs. Explore our
-          company information and services below.
+          We&apos;re here to help you with all your technology needs. Explore
+          our company information and services below.
         </p>
       </div>
 
@@ -30,7 +31,7 @@ export default function SupportPage() {
             Datahub Systems Technologies (DST) is an IT company that specializes
             in providing comprehensive technology solutions for businesses of
             all sizes. Our mission is to help our clients stay ahead of the
-            curve in today's fast-paced digital landscape by delivering
+            curve in today&apos;s fast-paced digital landscape by delivering
             cutting-edge solutions that drive growth and improve efficiency.
           </p>
           <p className="mb-4">
@@ -45,7 +46,7 @@ export default function SupportPage() {
             In addition to our solutions, we also offer a range of training and
             consulting services to help our customers realize their mission. We
             believe that continuous learning and improvement is key to staying
-            competitive in today's fast-paced business environment.
+            competitive in today&apos;s fast-paced business environment.
           </p>
           <p className="mb-4">
             Our team is dedicated to providing responsive and professional
@@ -54,11 +55,11 @@ export default function SupportPage() {
             technology partner for them.
           </p>
           <p>
-            At DST, we take pride in our ability to understand our customers'
-            unique needs and tailor our solutions to fit those specific
-            requirements. Our exceptional customer service and support ensure
-            that our clients can fully utilize the solutions we provide, making
-            technology less complex and more accessible.
+            At DST, we take pride in our ability to understand our
+            customers&apos; unique needs and tailor our solutions to fit those
+            specific requirements. Our exceptional customer service and support
+            ensure that our clients can fully utilize the solutions we provide,
+            making technology less complex and more accessible.
           </p>
         </CardContent>
       </Card>
@@ -69,9 +70,9 @@ export default function SupportPage() {
         </CardHeader>
         <CardContent>
           <p>
-            "It is our aim at DST to bridge the gap between technology and
+            &quot;It is our aim at DST to bridge the gap between technology and
             humanity through solutions that improve on how people connect, live
-            and work"
+            and work.&quot;
           </p>
         </CardContent>
       </Card>
@@ -161,7 +162,8 @@ export default function SupportPage() {
         </CardHeader>
         <CardContent>
           <p>
-            If you need further assistance, please don't hesitate to reach out:
+            If you need further assistance, please don&apos;t hesitate to reach
+            out:
           </p>
           <ul className="list-disc pl-6 mt-2">
             <li>Email: support@dst.com</li>
@@ -174,7 +176,7 @@ export default function SupportPage() {
   );
 }
 
-function ServiceCard({ icon, title, description }) {
+function ServiceCard({ icon, title, description }: any) {
   return (
     <Card className="flex flex-col items-center text-center p-6">
       {icon}
