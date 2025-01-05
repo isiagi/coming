@@ -1,3 +1,4 @@
+import PartnersAndDevelopers from "@/components/partners-and-developers";
 import { ServiceHeader } from "@/components/service-header";
 import SubNav from "@/components/subNav";
 import React from "react";
@@ -26,6 +27,8 @@ function page() {
           },
         ]}
       />
+
+      <PartnersAndDevelopers />
     </div>
   );
 }
