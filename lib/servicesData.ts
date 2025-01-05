@@ -7,7 +7,6 @@ import {
   Network,
   HardDrive,
   HeadphonesIcon,
-  LockIcon,
   UserCheckIcon,
   AlertTriangleIcon,
   SearchIcon,
