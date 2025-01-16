@@ -165,7 +165,7 @@ export const dataAnalytic = {
       description:
         "We design and implement robust data warehouses that grow with your business, ensuring efficient data storage and retrieval. Our solutions integrate data from various sources, providing a single source of truth for your organization.",
       imageSrc:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3re-Q__rxRzbaC5zakwLx4j9Ca4uxXSzsnA&s",
+        "https://plus.unsplash.com/premium_photo-1661386257356-c17257862be8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGF0YSUyMHdhcmVob3VzZXxlbnwwfHwwfHx8MA%3D%3D",
       benefits: [
         "Efficient data storage and retrieval",
         "Improved data quality",
@@ -323,7 +323,7 @@ export const cloud = {
       description:
         "We provide ongoing management and optimization of your cloud infrastructure across major platforms. Our team monitors performance, manages costs, and implements best practices to ensure you get the most value from your cloud investments.",
       imageSrc:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGo3kjyczmmJUeEkrxRBE889F515SGkVvJGg&s",
+        "https://media.istockphoto.com/id/1484912807/photo/cloud-computing-concept-digital-cloud-solutions-on-pcb-futuristic-background.jpg?s=612x612&w=0&k=20&c=gN2siKMuE9cBHJxnCSeI2GOyUsqlmPPFaRcidkEF35A=",
       benefits: [
         "Reduced cloud management costs",
         "Improved performance and reliability",
@@ -348,7 +348,7 @@ export const cloud = {
       description:
         "Our comprehensive security protocols ensure your data remains safe and compliant in the cloud environment. We implement encryption, access controls, and regular security audits to protect your cloud-based assets from threats and unauthorized access.",
       imageSrc:
-        "https://www.xcitium.com/blog/wp-content/uploads/2024/01/cloud-computing-security.png",
+        "https://media.istockphoto.com/id/1724789360/photo/digital-security-concept-and-cloud-computing-security.jpg?s=612x612&w=0&k=20&c=Fn_R9Vo2vGbJv_qxLvCE37JbEWD7RJq0Gzb_dbl1abE=",
       benefits: [
         "Enhanced data security",
         "Improved compliance",
@@ -515,7 +515,7 @@ export const managed = {
       description:
         "Our comprehensive network management services ensure the optimal performance, security, and reliability of your IT infrastructure. We proactively monitor, maintain, and troubleshoot your systems, allowing you to focus on your core business activities without worrying about IT issues.",
       imageSrc:
-        "https://plus.unsplash.com/premium_photo-1661765192121-f398fd1e8fa2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8TmV0d29yayUyME1hbmFnZW1lbnR8ZW58MHx8MHx8fDA%3D",
+        "https://plus.unsplash.com/premium_photo-1683836722479-411e30b8b6e1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG5ldHdvcmt8ZW58MHx8MHx8fDA%3D",
       benefits: [
         "24/7 network monitoring and support",
         "Proactive issue resolution",

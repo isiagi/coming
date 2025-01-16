@@ -6,6 +6,8 @@ import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
 import ITServicesShowcase from "@/components/it-services-showcase-updated";
+import MissionVisionValues from "./mission-vision-values-alternating";
+import { AboutCompany } from "./about-company";
 
 interface ServiceData {
   id: string;
@@ -62,16 +64,13 @@ function ServicePageContent({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <section id="overview" className={getSectionPadding()}>
-          <h2 className="text-3xl text-[#212529] font-bold mb-6">
+          {/* <h2 className="text-3xl text-[#212529] font-bold mb-6">
             {title} Overview
-          </h2>
-          {overviewContent}
+          </h2> */}
+          <AboutCompany />
         </section>
 
-        <ITServicesShowcase
-          getSectionPadding={getSectionPadding}
-          serviceData={serviceData}
-        />
+        <MissionVisionValues getSectionPadding={getSectionPadding} />
       </div>
     </>
   );

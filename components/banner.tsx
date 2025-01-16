@@ -17,7 +17,12 @@ export function Banner() {
         <p className="text-xl text-white mb-8">
           Innovative IT solutions for businesses of all sizes
         </p>
-        <Button size="lg">Get Started</Button>
+        <Button
+          className="bg-[#1E90FF] text-white outline-none hover:bg-[#1565C0] hover:text-white"
+          size="lg"
+        >
+          Get Started
+        </Button>
       </div>
     </section>
   );

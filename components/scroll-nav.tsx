@@ -157,7 +157,7 @@ export function ScrollNav({ items, height, onSectionClick }: any) {
                   "inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition-colors",
                   !isSticky && "pointer-events-none opacity-50",
                   activeItem === item.href
-                    ? "border-red-600 text-gray-900"
+                    ? "border-[#1E90FF] text-gray-900"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 )}
                 aria-current={activeItem === item.href ? "page" : undefined}

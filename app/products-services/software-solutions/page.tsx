@@ -34,7 +34,7 @@ const breadcrumbs = [
 
 const overviewContent = (
   <>
-    <p className="text-gray-600 mb-4">
+    <p className="text-[#212529] mb-4">
       Our comprehensive managed services provide a cost-effective way for
       organizations to outsource the management and maintenance of their IT
       systems. We offer tailored solutions to meet your specific needs, whether
