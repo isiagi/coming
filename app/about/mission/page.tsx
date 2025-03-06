@@ -1,18 +1,43 @@
 "use client";
 
-import AboutSection from "@/components/about-section";
-import MissionVisionValues from "@/components/mission-vision-values-alternating";
-// import { ScrollNav } from "@/components/scroll-nav";
-import { ServiceHeader } from "@/components/service-header";
-import React, { useEffect, useState } from "react";
+import ServicePage from "@/components/about-service";
+
+import { managed } from "@/lib/servicesData";
 
 const navItems = [
-  { label: "All", href: "#overviewz" },
+  { label: "About Us", href: "#overview" },
   { label: "Mission", href: "#mission" },
   { label: "Vision", href: "#vision" },
-  { label: "Core Values", href: "#core-values" },
-  { label: "Patners", href: "#patners" },
+  {
+    label: "Core Values",
+    href: "#core-values",
+  },
 ];
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  {
+    label: "About Us",
+    href: "/about/mission",
+  },
+];
+
+const overviewContent = (
+  <>
+    <p className="text-[#6C757D] mb-4">
+      Our comprehensive managed services provide a cost-effective way for
+      organizations to outsource the management and maintenance of their IT
+      systems. We offer tailored solutions to meet your specific needs, whether
+      you&apos;re a small business or a large enterprise.
+    </p>
+    <p className="text-[#6C757D]">
+      With our managed services, you can focus on your core business while we
+      ensure that your IT infrastructure is running smoothly, securely, and
+      efficiently.
+    </p>
+  </>
+);
+
 
 function About() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,39 +77,16 @@ function About() {
 
   return (
     <div>
-      {/* <ScrollNav
-        items={navItems}
-        height={0}
-        onSectionClick={setClickedSection}
-      /> */}
-      <ServiceHeader
+      <ServicePage
         title="About Us"
-        subtitle="Enterprise-grade IT infrastructure management"
-        image="/placeholder.svg?height=384&width=384"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          {
-            label: "Partners & Developers",
-            href: "/products-services/partners-developers",
-          },
-        ]}
+        subtitle="Learn more about our mission, vision, and core values."
+        image="https://media.istockphoto.com/id/1402604850/photo/the-word-about-us-on-wooden-cubes-business-communication-and-information.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZxHwjIBsTx_is1_JLT02ohMUn0okczh8xPGWA3ptwJI="
+        breadcrumbs={breadcrumbs}
+        navItems={navItems}
+        serviceData={managed}
+        overviewContent={overviewContent}
       />
-      <AboutSection />
-      <MissionVisionValues getSectionPadding={getSectionPadding} />
-      <section
-        id="mission"
-        className={`min-h-screen ${getSectionPadding("mission")}`}
-      ></section>
 
-      <section
-        id="vision"
-        className={`min-h-screen ${getSectionPadding("vision")}`}
-      ></section>
-
-      <section
-        id="core-values"
-        className={`min-h-screen ${getSectionPadding("core-values")}`}
-      ></section>
     </div>
   );
 }

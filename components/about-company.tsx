@@ -2,11 +2,13 @@ import Image from "next/image";
 
 export function AboutCompany() {
   return (
-    <section className="py-16 bg-white">
+
+    <section className="py-5 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        {/* <h2 className="text-3xl font-bold text-center mb-8">
           About Datahub Systems Technologies (DST)
-        </h2>
+        </h2> */}
+
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/3 flex-shrink-0">
             <div className="relative w-full h-[400px] lg:h-full">

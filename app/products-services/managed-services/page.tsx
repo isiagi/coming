@@ -24,13 +24,17 @@ const breadcrumbs = [
 
 const overviewContent = (
   <>
-    <p className="text-gray-600 mb-4">
+
+    <p className="text-[#6C757D] mb-4">
+
       Our comprehensive managed services provide a cost-effective way for
       organizations to outsource the management and maintenance of their IT
       systems. We offer tailored solutions to meet your specific needs, whether
       you&apos;re a small business or a large enterprise.
     </p>
-    <p className="text-gray-600">
+
+    <p className="text-[#6C757D]">
+
       With our managed services, you can focus on your core business while we
       ensure that your IT infrastructure is running smoothly, securely, and
       efficiently.

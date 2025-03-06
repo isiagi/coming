@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Menu, X, Search } from 'lucide-react'
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X, Search } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,18 +10,28 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
-const ListItem = ({ className, title, href, children }: { className?: string, title: string, href: string, children?: React.ReactNode }) => {
+const ListItem = ({
+  className,
+  title,
+  href,
+  children,
+}: {
+  className?: string;
+  title: string;
+  href: string;
+  children?: React.ReactNode;
+}) => {
   return (
     <li className="w-full">
       <NavigationMenuLink asChild>
@@ -41,59 +51,65 @@ const ListItem = ({ className, title, href, children }: { className?: string, ti
         </Link>
       </NavigationMenuLink>
     </li>
-  )
-}
+  );
+};
 
 const navItems = [
   {
-    title: 'About DST',
-    href: '/about',
+    title: "About DST",
+    href: "/about",
     sublinks: [
-      { title: 'Mission', href: '/about/mission' },
-      { title: 'Vision', href: '/about/vision' },
-      { title: 'Core Values', href: '/about/core-values' },
-      { title: 'Partners', href: '/about/partners' },
-      { title: 'Contact Us', href: '/about/contact' },
-      { title: 'Trust Center', href: '/about/trust-center' },
-      { title: 'Careers', href: '/about/careers' },
-      { title: 'Compliance & Integrity', href: '/about/compliance-integrity' },
-      { title: 'Public Policy', href: '/about/public-policy' },
-      { title: 'News & Events', href: '/about/news-events' },
+      { title: "About Us", href: "/about/mission" },
+      { title: "Partners", href: "/about/partners" },
+      { title: "Contact Us", href: "/about/contact" },
+      { title: "Trust Center", href: "/about/trust-center" },
+      { title: "Careers", href: "/about/careers" },
+      { title: "Compliance & Integrity", href: "/about/compliance-integrity" },
+      { title: "Public Policy", href: "/about/public-policy" },
+      { title: "News & Events", href: "/about/news-events" },
     ],
   },
   {
-    title: 'Products & Services',
-    href: '/products-services',
+    title: "Products & Services",
+    href: "/products-services",
     sublinks: [
-      { title: 'Managed Services', href: '/products-services/managed-services' },
-      { title: 'Cybersecurity', href: '/products-services/cybersecurity' },
-      { title: 'Data Analytics', href: '/products-services/data-analytics' },
-      { title: 'Software Solutions', href: '/products-services/software-solutions' },
-      { title: 'Cloud Computing', href: '/products-services/cloud-computing' },
+      {
+        title: "Managed Services",
+        href: "/products-services/managed-services",
+      },
+      { title: "Cybersecurity", href: "/products-services/cybersecurity" },
+      { title: "Data Analytics", href: "/products-services/data-analytics" },
+      {
+        title: "Software Solutions",
+        href: "/products-services/software-solutions",
+      },
+      { title: "Cloud Computing", href: "/products-services/cloud-computing" },
     ],
   },
-  { title: 'Partners & Developers', href: '/partners-developers' },
-  { title: 'Support', href: '/support' },
-]
+  { title: "Partners & Developers", href: "/partners-developers" },
+  { title: "Support", href: "/support" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     // Implement search functionality here
-    console.log('Search submitted')
-  }
+    console.log("Search submitted");
+  };
 
   return (
     <nav className="bg-white shadow-md fixed top-0 inset-x-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-800">DST</Link>
+            <Link href="/" className="text-2xl font-bold text-gray-800">
+              DST
+            </Link>
           </div>
-          
+
           {/* Desktop menu */}
           <div className="hidden sm:flex sm:items-center">
             {!isSearchOpen ? (
@@ -103,15 +119,17 @@ export default function Navbar() {
                     {navItems.map((item) => (
                       <NavigationMenuItem key={item.title}>
                         {item.sublinks ? (
-                          <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                          <NavigationMenuTrigger>
+                            {item.title}
+                          </NavigationMenuTrigger>
                         ) : (
                           <Link href={item.href} legacyBehavior passHref>
-                            <NavigationMenuLink className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">
+                            <NavigationMenuLink className="px-3 py-2 text-sm font-medium text-[#212529] hover:text-[#1E90FF]">
                               {item.title}
                             </NavigationMenuLink>
                           </Link>
                         )}
-                        {item.title === 'About DST' && (
+                        {item.title === "About DST" && (
                           <NavigationMenuContent>
                             <div className="w-[400px] p-4">
                               <ul className="grid grid-cols-2 gap-3">
@@ -124,20 +142,22 @@ export default function Navbar() {
                                     />
                                   ))}
                                 </div>
-                                <div className="space-y-2">
-                                  {item.sublinks?.slice(5, 10).map((sublink) => (
-                                    <ListItem
-                                      key={sublink.title}
-                                      title={sublink.title}
-                                      href={sublink.href}
-                                    />
-                                  ))}
+                                <div className="space-y-2 text-[#212529]">
+                                  {item.sublinks
+                                    ?.slice(5, 10)
+                                    .map((sublink) => (
+                                      <ListItem
+                                        key={sublink.title}
+                                        title={sublink.title}
+                                        href={sublink.href}
+                                      />
+                                    ))}
                                 </div>
                               </ul>
                             </div>
                           </NavigationMenuContent>
                         )}
-                        {item.title === 'Products & Services' && (
+                        {item.title === "Products & Services" && (
                           <NavigationMenuContent>
                             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                               {item.sublinks?.map((sublink) => (
@@ -248,7 +268,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {!isSearchOpen && (
-        <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`}>
+        <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
           <div className="pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <div key={item.title}>
@@ -287,6 +307,5 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-  )
+  );
 }
-

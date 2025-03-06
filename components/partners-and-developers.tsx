@@ -29,6 +29,9 @@ import {
   ShieldCheck,
   BarChart2,
   Cpu,
+
+  ArrowRight,
+
 } from "lucide-react";
 
 const FeatureCard = ({ icon: Icon, title, description }: any) => (
@@ -45,7 +48,9 @@ const FeatureCard = ({ icon: Icon, title, description }: any) => (
 
 export default function PartnersAndDevelopers() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+
+    <div className="min-h-screen bg-[#fff] py-12 px-4 sm:px-6 lg:px-8">
+
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <Image
@@ -55,7 +60,9 @@ export default function PartnersAndDevelopers() {
             height={100}
             className="mx-auto mb-4"
           />
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+
+          <h1 className="text-4xl font-bold text-blue-500 mb-4">
+
             Partners and Developers
           </h1>
           <p className="text-xl text-gray-700">
@@ -74,7 +81,11 @@ export default function PartnersAndDevelopers() {
             <div className="space-y-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Partner with DST</CardTitle>
+
+                  <CardTitle className="text-blue-500">
+                    Partner with DST
+                  </CardTitle>
+
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col md:flex-row items-center mb-4">
@@ -101,13 +112,20 @@ export default function PartnersAndDevelopers() {
                         to our core values of simplicity, integrity, efficiency,
                         value addition, and enthusiasm.
                       </p>
-                      <Button>Become a Partner</Button>
+
+                      <Button className="self-start bg-transparent border border-[#1E90FF] text-[#1E90FF] hover:bg-[#1E90FF] hover:text-white transition-all duration-300 ease-in-out">
+                        Become Patrner
+                        <ArrowRight className="ml-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out h-4 w-4" />
+                      </Button>
+
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">
+
+              <h2 className="text-2xl font-semibold text-blue-400 mt-8 mb-4">
+
                 Why Partner with DST?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -130,7 +148,11 @@ export default function PartnersAndDevelopers() {
 
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="services">
-                  <AccordionTrigger>Our Services for Partners</AccordionTrigger>
+
+                  <AccordionTrigger className="text-blue-500">
+                    Our Services for Partners
+                  </AccordionTrigger>
+
                   <AccordionContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FeatureCard
@@ -195,7 +217,13 @@ export default function PartnersAndDevelopers() {
                         values of simplicity, integrity, efficiency, value
                         addition, and enthusiasm.
                       </p>
-                      <Button>Access Developer Resources</Button>
+
+                      {/* <Button>Access Developer Resources</Button> */}
+                      <Button className="self-start bg-transparent border border-[#1E90FF] text-[#1E90FF] hover:bg-[#1E90FF] hover:text-white transition-all duration-300 ease-in-out">
+                        Access Developer Resources
+                        <ArrowRight className="ml-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out h-4 w-4" />
+                      </Button>
+
                     </div>
                   </div>
                 </CardContent>
@@ -264,7 +292,11 @@ export default function PartnersAndDevelopers() {
 
         <Card>
           <CardHeader>
-            <CardTitle>About Datahub Systems Technologies (DST)</CardTitle>
+
+            <CardTitle className="text-3xl font-bold text-center mb-8 text-[#1E90FF]">
+              About Datahub Systems Technologies (DST)
+            </CardTitle>
+
           </CardHeader>
           <CardContent>
             <div className="flex flex-col md:flex-row items-center">

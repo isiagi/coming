@@ -1,21 +1,22 @@
-import Footer from '@/components/footer';
-import './globals.css';
+import Navbar from "@/components/Navbar";
+import "./globals.css";
 
-import Navbar from '@/components/Navbar'
+import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/footer";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>
         <Navbar />
-        <main>{children}</main>
+        {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
-  )
+  );
 }
-

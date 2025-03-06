@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-import CoreValues from "./core-values";
+
+// import CoreValues from "./core-values";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { ValueCard } from "./value-card";
+import { Lightbulb, Heart, Zap, Target, Smile } from "lucide-react";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function MissionVisionValues({ getSectionPadding }: any) {
@@ -11,7 +16,9 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
         "It is our aim at DST to bridge the gap between technology and humanity through solutions that improve on how people connect, live and work",
       ],
       imageUrl:
-        "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
+
+        "https://media.istockphoto.com/id/1138312771/photo/purpose-word-in-wooden-cube.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tzm--ZAAxTUHcg6v_0K9HYBYo45qWUIPfCI6My221ts=",
+
       imageAlt: "Team collaborating on a project",
       id: "mission",
     },
@@ -21,14 +28,16 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
         "To be a provider of reliable solutions that empower consumers",
       ],
       imageUrl:
+
         "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
+
       imageAlt: "Futuristic vision of technology",
       id: "vision",
     },
   ];
 
   return (
-    <section className="w-full py-12 md:py-24 bg-white">
+    <section className={"w-full py-12 md:py-24 bg-white"}>
       <div className="container px-4 md:px-6">
         {sections.map((section, index) => (
           <div
@@ -44,7 +53,7 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
                 alt={section.imageAlt}
                 width={600}
                 height={400}
-                className="rounded-lg object-cover w-full h-[400px]"
+                className="rounded-lg object-cover w-full h-[300px]"
               />
             </div>
             <div className="w-full md:w-1/2 space-y-4">
@@ -74,7 +83,50 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
             </div>
           </div>
         ))}
-        <CoreValues />
+
+        {/* <CoreValues /> */}
+        <Card
+          id="core-values"
+          className={`mb-8 hover:shadow-xl transition-shadow duration-300 ease-in-out mt-2 ${getSectionPadding(
+            "core-values"
+          )}`}
+        >
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">
+              Core Values
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <ValueCard
+                icon={<Lightbulb className="w-6 h-6 text-yellow-500" />}
+                title="Simplicity"
+                description="We focus on what truly adds value, building trust and strengthening relationships through simplicity."
+              />
+              <ValueCard
+                icon={<Heart className="w-6 h-6 text-red-500" />}
+                title="Integrity"
+                description="We do what's right, even when it's not required, upholding the highest ethical standards."
+              />
+              <ValueCard
+                icon={<Zap className="w-6 h-6 text-blue-500" />}
+                title="Efficiency"
+                description="We continuously improve our processes, reducing costs and increasing productivity."
+              />
+              <ValueCard
+                icon={<Target className="w-6 h-6 text-green-500" />}
+                title="Value Addition"
+                description="We go beyond expectations, creating tangible benefits for all stakeholders."
+              />
+              <ValueCard
+                icon={<Smile className="w-6 h-6 text-orange-500" />}
+                title="Enthusiasm"
+                description="We embrace challenges with energy and passion, inspiring exceptional results."
+              />
+            </div>
+          </CardContent>
+        </Card>
+
       </div>
     </section>
   );

@@ -16,12 +16,14 @@ const FeatureCard = ({
   <div id={id} className={`${getSectionPadding?.(id) || ""}`}>
     <Card className="mb-6 w-full min-h-screen flex flex-col">
       <CardHeader className="flex flex-row items-center space-x-2">
-        <Icon className="w-8 h-8 text-primary" />
-        <CardTitle className="text-2xl">{title}</CardTitle>
+
+        <Icon className="w-8 h-8 text-gold-300 text-primary " />
+        <CardTitle className="text-2xl text-[#212529]">{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-between">
         <div>
-          <p className="mb-4 text-lg">{description}</p>
+          <p className="mb-5 text-[#6C757D]">{description}</p>
+
           <div className="relative w-full h-96 mb-6">
             <Image
               src={imageSrc}
@@ -31,29 +33,39 @@ const FeatureCard = ({
               className="rounded-md "
             />
           </div>
-          <h3 className="text-xl font-semibold mb-2">Key Benefits:</h3>
+
+          <h3 className="text-xl font-semibold mb-2 text-[#00C853]">
+            Key Benefits:
+          </h3>
           <ul className="list-disc pl-5 mb-4">
             {benefits.map((benefit: any, index: any) => (
-              <li key={index} className="mb-2">
+              <li key={index} className="mb-2 text-slate-600">
+
                 {benefit}
               </li>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold mb-2">Potential Outcomes:</h3>
-          <p className="mb-4">{potentialOutcomes.description}</p>
+
+          <h3 className="text-xl font-semibold mb-2 text-[#212529]">
+            Potential Outcomes:
+          </h3>
+          <p className="mb-4 text-slate-700">{potentialOutcomes.description}</p>
           <ul className="list-disc pl-5">
             {potentialOutcomes.results.map((result: any, index: any) => (
-              <li key={index} className="mb-2">
+              <li key={index} className="mb-2 text-slate-600">
+
                 {result}
               </li>
             ))}
           </ul>
         </div>
         <div className="mt-6 p-4 bg-muted rounded-md">
-          <h3 className="text-lg font-semibold mb-2">
+
+          <h3 className="text-lg font-semibold mb-2 text-slate-700">
             Why Choose Us for {title}?
           </h3>
-          <p>
+          <p className="text-[#00C853]">
+
             Our team of experts brings years of experience and cutting-edge
             knowledge to every project. We&apos;re committed to delivering
             tailored solutions that drive your business forward.

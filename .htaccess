@@ -1,15 +1,17 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
     
-    # Redirect root to index.html
-    RewriteRule ^$ index.html [L]
+    # Handle WebSocket connections
+    RewriteCond %{HTTP:Upgrade} =websocket [NC]
+    RewriteRule ^(.*)$ ws://localhost:3000/$1 [P,L,QSA]
     
-    # Redirect all requests to corresponding HTML files
+    # Handle HTTP requests
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME}\.html -f
-    RewriteRule ^(.*)$ $1.html [L]
-  </IfModule>
-  
-  # Disable directory browsing
-  Options -Indexes
+    RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L,QSA]
+    
+    # Prevent direct access to Next.js server files
+    RewriteRule ^server\.js$ - [F]
+    RewriteRule ^\.next/.*$ - [F]
+</IfModule>
