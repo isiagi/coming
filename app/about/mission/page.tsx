@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import ServicePage from "@/components/about-service";
 
 import { managed } from "@/lib/servicesData";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "About Us", href: "#overview" },
@@ -37,7 +39,6 @@ const overviewContent = (
     </p>
   </>
 );
-
 
 function About() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -86,7 +87,6 @@ function About() {
         serviceData={managed}
         overviewContent={overviewContent}
       />
-
     </div>
   );
 }
