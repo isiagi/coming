@@ -14,10 +14,28 @@ export default function ContactForm() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Message sent successfully!");
+      } else {
+        alert(`Error: ${JSON.stringify(result.error)}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   return (
@@ -85,7 +103,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
                 placeholder="Name"
-                className="bg-transparent border-gray-700"
+                className="bg-transparent text-black border-gray-700"
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -94,7 +112,7 @@ export default function ContactForm() {
               <Input
                 type="email"
                 placeholder="Email"
-                className="bg-transparent border-gray-700"
+                className="bg-transparent text-black border-gray-700"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
@@ -103,7 +121,7 @@ export default function ContactForm() {
             </div>
             <Input
               placeholder="Subject"
-              className="bg-transparent border-gray-700"
+              className="bg-transparent text-black border-gray-700"
               value={formData.subject}
               onChange={(e) =>
                 setFormData({ ...formData, subject: e.target.value })
@@ -111,7 +129,7 @@ export default function ContactForm() {
             />
             <Textarea
               placeholder="Message"
-              className="bg-transparent border-gray-700 min-h-[200px]"
+              className="bg-transparent text-black border-gray-700 min-h-[200px]"
               value={formData.message}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })

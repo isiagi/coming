@@ -12,31 +12,15 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/mission"
+                  href="/about/mission"
                   className="text-gray-600 hover:text-gray-900"
                 >
-                  Mission
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/vision"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Vision
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/core-values"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Core Values
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/partners"
+                  href="/partners-developers"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Partners
@@ -44,7 +28,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/about/contact"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Contact Us
@@ -60,7 +44,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/careers"
+                  href="/about/careers"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Careers
@@ -84,7 +68,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/news"
+                  href="/about/news-events"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   News & Events
@@ -101,7 +85,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/managed-services"
+                  href="/products-services/managed-services"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Managed Services
@@ -109,7 +93,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/cybersecurity"
+                  href="/products-services/cybersecurity"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Cybersecurity
@@ -117,7 +101,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/data-analytics"
+                  href="/products-services/data-analytics"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Data Analytics
@@ -125,7 +109,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/software-solutions"
+                  href="/products-services/software-solutions"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Software Solutions
@@ -133,7 +117,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/cloud-computing"
+                  href="/products-services/cloud-computing"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Cloud Computing
@@ -150,13 +134,13 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/partner-program"
+                  href="/partners-developers"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Partner Program
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/developer-resources"
                   className="text-gray-600 hover:text-gray-900"
@@ -171,7 +155,7 @@ export default function Footer() {
                 >
                   Partner Portal
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -181,13 +165,13 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/technical-support"
+                  href="//support"
                   className="text-gray-600 hover:text-gray-900"
                 >
                   Technical Support
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/documentation"
                   className="text-gray-600 hover:text-gray-900"
@@ -202,12 +186,12 @@ export default function Footer() {
                 >
                   Training
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link href="/faq" className="text-gray-600 hover:text-gray-900">
                   FAQ
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

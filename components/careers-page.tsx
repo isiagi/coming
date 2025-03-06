@@ -44,9 +44,9 @@ export function CareersPage() {
           Stay Connected
         </h2>
         <p className="mb-6 text-center text-gray-600 max-w-2xl mx-auto">
-          If you're interested in future opportunities, please fill out the form
-          below. We'll keep your information on file and contact you if a
-          suitable position becomes available.
+          If you&lsquo;re interested in future opportunities, please fill out
+          the form below. We&lsquo;ll keep your information on file and contact
+          you if a suitable position becomes available.
         </p>
         <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
           <div>

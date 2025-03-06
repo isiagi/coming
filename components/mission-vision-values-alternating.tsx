@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import CoreValues from "./core-values";
+// import CoreValues from "./core-values";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ValueCard } from "./value-card";
 import { Lightbulb, Heart, Zap, Target, Smile } from "lucide-react";
@@ -31,7 +31,7 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
   ];
 
   return (
-    <section className="w-full py-12 md:py-24 bg-white">
+    <section className={"w-full py-12 md:py-24 bg-white"}>
       <div className="container px-4 md:px-6">
         {sections.map((section, index) => (
           <div

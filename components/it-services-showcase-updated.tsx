@@ -16,7 +16,7 @@ const FeatureCard = ({
   <div id={id} className={`${getSectionPadding?.(id) || ""}`}>
     <Card className="mb-6 w-full min-h-screen flex flex-col">
       <CardHeader className="flex flex-row items-center space-x-2">
-        <Icon className="w-8 h-8 text-[#FFD700] text-primary " />
+        <Icon className="w-8 h-8 text-gold-300 text-primary " />
         <CardTitle className="text-2xl text-[#212529]">{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-between">

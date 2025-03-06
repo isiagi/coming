@@ -10,7 +10,7 @@ export function ValueCard({ icon, title, description }: ValueCardProps) {
   return (
     <Card className="flex flex-col items-center text-center group">
       <CardHeader>
-        <div className="w-20 h-10 rounded-full px-1 flex bg-red-100 mb-4 items-center justify-start group-hover:bg-red-200 transition-colors duration-300 ease-in-out group-hover:justify-end transition-all duration-300 ease-in-out">
+        <div className="w-20 h-10 rounded-full px-1 flex bg-blue-100 mb-4 items-center justify-start group-hover:bg-blue-200 transition-colors duration-300 ease-in-out group-hover:justify-end transition-all duration-400">
           <div>{icon}</div>
         </div>
         <CardTitle>{title}</CardTitle>

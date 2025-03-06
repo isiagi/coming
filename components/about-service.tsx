@@ -5,7 +5,7 @@ import { useState, useCallback, Suspense } from "react";
 import { ServiceHeader } from "@/components/service-header";
 import { ScrollNav } from "@/components/scroll-nav";
 import SubNav from "@/components/subNav";
-import ITServicesShowcase from "@/components/it-services-showcase-updated";
+// import ITServicesShowcase from "@/components/it-services-showcase-updated";
 import MissionVisionValues from "./mission-vision-values-alternating";
 import { AboutCompany } from "./about-company";
 
@@ -32,9 +32,9 @@ function ServicePageContent({
   image,
   breadcrumbs,
   navItems,
-  serviceData,
-  overviewContent,
-}: ServicePageProps) {
+}: // serviceData,
+// overviewContent,
+ServicePageProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clickedSection, setClickedSection] = useState("");
 
