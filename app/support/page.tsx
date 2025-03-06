@@ -65,7 +65,7 @@ export default function Support() {
                   How can we help you?
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Explore our support resources or get in touch with our team
+                  Explore our support resources or get in touch with our team!
                 </p>
               </div>
               <div className="space-x-4">
