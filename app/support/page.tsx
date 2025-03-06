@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   LifeBuoy,
@@ -348,5 +349,6 @@ export default function Support() {
         </section>
       </main>
     </div>
+
   );
 }

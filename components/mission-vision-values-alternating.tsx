@@ -1,9 +1,11 @@
 import Image from "next/image";
 
+
 // import CoreValues from "./core-values";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ValueCard } from "./value-card";
 import { Lightbulb, Heart, Zap, Target, Smile } from "lucide-react";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function MissionVisionValues({ getSectionPadding }: any) {
@@ -14,7 +16,9 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
         "It is our aim at DST to bridge the gap between technology and humanity through solutions that improve on how people connect, live and work",
       ],
       imageUrl:
+
         "https://media.istockphoto.com/id/1138312771/photo/purpose-word-in-wooden-cube.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tzm--ZAAxTUHcg6v_0K9HYBYo45qWUIPfCI6My221ts=",
+
       imageAlt: "Team collaborating on a project",
       id: "mission",
     },
@@ -24,7 +28,9 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
         "To be a provider of reliable solutions that empower consumers",
       ],
       imageUrl:
-        "https://images.unsplash.com/photo-1545935950-b7a28791ad7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNvbXBhbnklMjB2aXNpb258ZW58MHx8MHx8fDA%3D",
+
+        "https://plus.unsplash.com/premium_photo-1713967593142-53e8285a2a2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWlzc2lvbiUyMGFuZCUyMGdvYWx8ZW58MHx8MHx8fDA%3D",
+
       imageAlt: "Futuristic vision of technology",
       id: "vision",
     },
@@ -77,6 +83,7 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
             </div>
           </div>
         ))}
+
         {/* <CoreValues /> */}
         <Card
           id="core-values"
@@ -119,6 +126,7 @@ export default function MissionVisionValues({ getSectionPadding }: any) {
             </div>
           </CardContent>
         </Card>
+
       </div>
     </section>
   );

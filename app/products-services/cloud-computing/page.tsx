@@ -34,14 +34,18 @@ const breadcrumbs = [
 
 const overviewContent = (
   <>
+
     <p className="text-[#6C757D] mb-4">
+
       Our cloud computing services offer a wide range of solutions to meet the
       needs of businesses of all sizes. From simple web hosting to complex
       enterprise-level solutions, we have the expertise and resources to deliver
       the cloud computing services you need.
     </p>
+
     <p className="text-[#6C757D] mb-4">Our cloud computing services include:</p>
     <ul className="list-disc pl-6 text-[#6C757D]">
+
       <li>Cloud hosting services</li>
       <li>Cloud-based databases</li>
       <li>Cloud-based storage solutions</li>

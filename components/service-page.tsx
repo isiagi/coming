@@ -62,9 +62,11 @@ function ServicePageContent({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <section id="overview" className={getSectionPadding()}>
+
           <h2 className="text-3xl text-[#212529] font-bold mb-6">
             {title} Overview
           </h2>
+
           {overviewContent}
         </section>
 

@@ -78,6 +78,7 @@ const events: Event[] = [
 
 export function NewsAndEvents() {
   return (
+
     <section className="py-16 bg-[#fff]">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl text-[#212529] font-bold text-center mb-12">
@@ -87,13 +88,16 @@ export function NewsAndEvents() {
           <div>
             <h3 className="text-2xl text-[#212529] font-semibold mb-6 flex items-center">
               <Newspaper className="mr-2 text-[#00C853]" />
+
               Latest News
             </h3>
             <div className="space-y-6">
               {newsItems.map((item, index) => (
                 <div
                   key={index}
+
                   className="bg-white rounded-lg shadow-md overflow-hidden group"
+
                 >
                   <Image
                     src={item.image}
@@ -103,6 +107,7 @@ export function NewsAndEvents() {
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
+
                     <h4 className="text-xl text-[#212529] font-semibold mb-2">
                       {item.title}
                     </h4>
@@ -117,6 +122,7 @@ export function NewsAndEvents() {
                       <Link href={`/news/${item.slug}`}>
                         Read More
                         <ChevronRight className="ml-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out h-4 w-4" />
+
                       </Link>
                     </Button>
                   </div>
@@ -125,15 +131,19 @@ export function NewsAndEvents() {
             </div>
           </div>
           <div>
+
             <h3 className="text-2xl text-[#212529] font-semibold mb-6 flex items-center">
               <CalendarDays className="mr-2 text-[#FFD700]" />
+
               Upcoming Events
             </h3>
             <div className="space-y-6">
               {events.map((event, index) => (
                 <div
                   key={index}
+
                   className="bg-white rounded-lg shadow-md overflow-hidden group"
+
                 >
                   <Image
                     src={event.image}
@@ -143,7 +153,9 @@ export function NewsAndEvents() {
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
+
                     <h4 className="text-xl text-[#212529] font-semibold mb-2">
+
                       {event.title}
                     </h4>
                     <p className="text-sm text-gray-500 mb-1">
@@ -152,6 +164,7 @@ export function NewsAndEvents() {
                     <p className="text-sm text-gray-500 mb-4">
                       Location: {event.location}
                     </p>
+
                     <Button
                       variant="outline"
                       size="sm"
@@ -161,6 +174,7 @@ export function NewsAndEvents() {
                       <Link href={`/events/${event.slug}`}>
                         Learn More
                         <ChevronRight className="ml-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out h-4 w-4" />
+
                       </Link>
                     </Button>
                   </div>

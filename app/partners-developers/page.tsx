@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   Handshake,
@@ -18,6 +19,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 
 export default function PartnersDevelopers() {
   return (
@@ -442,6 +444,7 @@ export default function PartnersDevelopers() {
           </div>
         </section>
       </main>
+
     </div>
   );
 }
